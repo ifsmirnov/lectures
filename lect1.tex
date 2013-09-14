@@ -1,0 +1,460 @@
+\input{../../header}
+
+\title{Случайные процессы}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+\part*{Введение. Историческая справка}
+\underline{Теория вероятностей}: математический анализ случайных явлений.\\
+\underline{Теория случайных процессов}: стохастические модели и фактор времени.
+
+\paragraph{Предпосылки к изучению}
+\begin{itemize}
+\item 1827, Р. Броун~-- броуновское движение частиц в воде~$\Rightarrow$ процесс броуновского движения
+\item 1903, Л. Башелье~-- колебания курсов бумаг на бирже~$\Rightarrow$ процесс броуновского движения
+\item 1906, А.А. Марков~-- анализ комбинаций гласных и согласных в романе <<Евгений Онегин>>~$\Rightarrow$ марковские цепи
+\item 1903, Ф. Лундберг~-- модель деятельности страховой компании~$\Rightarrow$ пуассоновский процесс
+\item 1873, Ф. Гальтон, Г. Ватсон~-- анализ вымирания аристократических фамилий в Великобритании~$\Rightarrow$ ветвящиеся процессы
+\item Начало XX века, А. Эрланг~-- изучение загрузки телефонных сетей~$\Rightarrow$ теория массового обслуживания
+\end{itemize}
+
+\paragraph{Применения}
+\begin{itemize}
+\item Физика (стохастическое исчисление, теория гиббсовских полей)
+\item Экономика (финансовая математика)
+\item Биология
+\end{itemize}
+
+\part{Случайные процессы}
+\section*{Общие определения}
+\begin{definition}
+Пусть $(\Omega, F, P)$~-- вероятностное пространство, а $(E, \mathcal{E})$~-- измеримое пространство.
+Отображение $\xi: \Omega \rightarrow E$ называется \emph{случайным элементом}, если оно измеримо,
+т.е. $$\forall B \in \mathcal{E}\ \xi^{-1}(B) = \{\omega: \xi(\omega) \in B\} \in F$$
+\end{definition}
+\begin{definition}
+Пусть $T$~-- некоторое множество и на $(\Omega, F,P)$ для $\forall t\in T$ задан случайный элемент $X_t$. Тогда набор $X = {X_t, t \in T}$ называется \emph{случайной функцией} на множестве $T$. 
+\end{definition}
+
+\begin{remark}
+Вообще говоря, не предполагается, что все $X_t$ принимают значения в одном и том же пространстве.
+\end{remark}
+
+\begin{definition}
+Пусть $X = (X(t, \omega))$. При фиксированном $\omega = \omega_0$ функция
+$$\tilde{X}_{\omega_0}(t) = X_t(\omega) \vert _{\omega=\omega_0}$$
+на $T$ называется \emph{траекторией} (или реализацией) случайной функции $X = {X_t, t\in T}$. 
+\end{definition}
+
+\subsection{Терминология}
+\begin{itemize}
+\item Если $T \subset \mathbb{R}$, то случайная функция называется случайным процессом.
+\item Если $T = [a, b], (a, b), [a, +\infty)$ и т.д., то процесс $X$ называется процессом с непрерывным временем.
+\item Если $T = \mathbb{N}, \mathbb{Z}$ и т. д. то процесс $X$ называется процессом с дискретным временем.
+\item Если $T \subset \mathbb{R}^d$, то процесс $X$ называется случайным полем.
+\end{itemize}
+
+\begin{remark}
+Далее всюду будем использовать термин <<случайный процесс>>.
+\end{remark}
+
+\subsection{Примеры}
+\begin{enumerate}
+\item $X_t(\omega) = \xi(\omega) \cdot f(t)$, где $\xi(\omega)$~-- с.в., $f(t)$~-- детерминированная функция.
+\item Пусть $\{\xi_n, n\in\mathbb{N}\}$~-- независимые случайные векторы, $S_n = \xi_1 + \dots + \xi_n$,
+$S_0 = 0$. Тогда процесс с дискретным временем $\{S_n, n \in \mathbb{Z}_+\}$
+называется случайным блужданием.
+
+Траектория: см. рис. 1
+\item Пусть $\{\xi_n, n \in \mathbb{N}\}$~-- норсв, $\xi_n >= 0$, $\xi_n \neq const$ п.н.,
+$S_n = \xi_1 + \dots + \xi_n$, $S_0 = 0$. Тогда процесс
+$$X_t = \sup\{n: S_n <= t\}, t >= 0$$
+называется процессом восстановления.
+
+Траектория: см. рис. 2
+
+\begin{statement}
+Процесс восстановления конечен почти наверное.
+\end{statement}
+\begin{proof}
+Пусть сначала $E\xi_i = a > 0$.
+
+Заметим, что $\{S_k \leq t\} \supset \{S_{k+1} \leq t\}$.
+
+$\{X_t=+\infty\} = \{\sup\{n:S_n\leq t\} = +\infty\} =
+\{\forall n: S_n \leq t\} = \mybigcap_n\{S_n \leq t\} \Rightarrow$
+|по непрерывности вероятностной меры|
+$\Rightarrow P(X_t = +\infty) = P(\forall n S_n \leq t) =
+\mylim_{n \to \infty} P(S_n \leq t)
+= \mylim_{n \to \infty} P(S_n \leq t_n) \leq$ % что такое t_n?
+|для больших n|
+$\leq \mylim_{n \to \infty} P(\frac{S_n}{n} < \frac{a}{2})$.
+
+Но по УЗБЧ $S_n \to a \Rightarrow P(S_n \leq a/2) \to P(a \leq a/2) = 0$.
+
+В силу того, что $X_t\uparrow$ при $t\uparrow$,
+$P(\exists t: X_t = +\infty) = P(\exists b: x_n = +\infty) = 0$. % что это за b и что тут должно быть?
+
+Если $E\xi_i = +\infty$, то случай сводится к предыдущему:
+$\exists C > 0: \tilde{\xi_n} = \min(\xi_n, C), E\tilde{\xi_n} > 0$.
+Тогда $P(X_t = +\infty) = P(\forall n S_n \leq t) \leq P(\tilde{S_n} \leq t) = 0$
+(доказали в случае конечного матожидания).
+\end{proof}
+
+Откуда может возникнуть процесс восстановления?
+Физическая модель~-- <<Модель перегорания лампочки>>. $\xi_n$~-- случайная величина, равная времени работы лампочки, $X_t$~-- сколько раз пришлось заменить лампочку в к моменту времени $t$.
+
+\item Модель страхования Крамера-Лундберга
+
+Пусть есть $\{\xi_n, n \in \myN\}, \{\eta_m, m \in \myN\},
+\xi_n \overset{d}{=} \xi_m,
+\eta_n \overset{d}{=} \eta_m,
+\{\xi_n, \eta_m\}$ независимы,
+$\xi_n, \eta_n \geq 0, \xi_n$ невырождены.
+
+Пусть $\{X_t, t \geq 0\}$~-- процесс восстановления, построенный по случайным величинам
+$\{\xi_n, n \in \myN\}, y_0, c > 0$. Тогда
+$Y_t = y_0 + c \cdot t - \mysum_{k=1}^{X_t} \eta_k$~--
+модель страхования Крамера-Лундберга.
+
+\paragraph*{Смысл параметров}
+\begin{itemize}
+\item $y_0$~-- начальный капитал
+\item $c$~-- скорость поступления страховых взносов
+\item $S_k = \xi_1 + \dots + \xi_k$~-- время $k$-й выплаты, $\eta_k$~-- размер этой выплаты
+\item $X_t$~-- число выплат к моменту времени $t > 0$
+\item $\mysum_{k=1}^{X_t} \eta_k$~-- общий размер выплат к этому моменту времени
+\item $Y_t$~-- текущий капитал компании
+\end{itemize}
+\end{enumerate}
+
+\section{Случайное блуждание на прямой}
+
+\begin{definition}
+Пусть ${\xi_n, n\in \myN}$~-- норсв, $P(\xi_n = 1) = p$, $P(\xi_n = -1) = q = 1-p$. Тогда процесс
+$(S_n, n \in \myZ_+), S_0 = 0, S_n = \xi_1 + \dots + \xi_n$ называется \emph{простейшим случайным блужанием на прямой}.
+Если $p = q = \frac{1}{2}$, то блуждание называется \emph{симметричным}.
+\end{definition}
+
+\subsection{Вопросы}
+\begin{enumerate}
+\item вероятность возвращения в ноль
+\item распределение первого момента возвращения в ноль
+\item среднее время в нуле
+\item геометрия траектории
+\end{enumerate}
+\begin{remark}
+Последние два вопроса~-- только для симметричного случая.
+\end{remark}
+
+\subsection{Возвращение в ноль}
+
+$P(\{S_n, n \in \myN\}~\text{вернется в ноль})$~-- ?
+
+$P(s1 \neq 0, s2 \neq 0, \dots, s_{2n-1} \neq 0, s_{2n} = 0)$~-- ?
+
+Вероятность каждой траектории, приводящей в $0$ в момент времени $2n$, одна и та же и равна $(pq)^n$.
+Каждую траекторию длины $2n$ можно сопоставить с вектором
+$\{\eps_1, \dots, \eps_{2n}\}, \eps_i \in \{-1, 1\}$. 
+
+\begin{definition}
+Траектория $(\eps_1, \dots, \eps_{2n})$ длины $2n$ называется
+\emph{положительной}, если
+$\forall k < 2n~\mysum_{j=1}^k \eps_j > 0$ и $\mysum_{j=1}^{2n} \eps_j = 0$.
+Число таких траекторий обозначим через $\tilde{C_n}$.
+\end{definition}
+
+\begin{statement}
+Наблюдение: $P(S_1 \neq 0, \dots, S_{2n-1} \neq 0, S_{2n} = 0) = 2 \cdot \tilde{C_n} \cdot (pq)^n$. 
+\end{statement}
+
+\begin{definition}
+Траектория $(\eps_1, \dots, \eps_{2n})$ длины $2n$ называется
+\emph{неотрицательной}, если
+$\forall k < 2n~\mysum_{j=1}^k \eps_j \geq 0$ и $\mysum_{j=1}^{2n} \eps_j = 0$.
+Число таких траекторий обозначим через $C_n$.
+\end{definition}
+
+\begin{statement}
+$\tilde{C_n} = C_{n-1}$.
+\end{statement}
+\begin{proof}
+Смотри рисунок 3.
+
+Чтобы получить из положительной траектории неотрицательную, покажем,
+что в начале стоит $1$, в конце~-- $-1$. Чтобы получить из неотрицательной положительную,
+добавим в начало $1$, а в конец $-1$. Получили биекцию между положительными траекториями длины $2n$
+и неотрицательными длины $2n-2$.
+\end{proof}
+
+\begin{statement}
+Пусть $C_0 = 1$. Тогда $C_n = \mysum_{k=0}^{n-1} C_k \cdot C_{n-1-k}$.
+\end{statement}
+\begin{proof}
+Смотри рисунок 4.
+
+Пусть $2k$~-- первый момент возвращения траектории в ноль.
+Ясно, что таких траекторий $\tilde{C_k} \cdot C_{n-k}$. Суммируя по $k=1\dots n$:
+
+$$C_n = \sum_{k=1}^n \tilde{C_k} \cdot C_{n-k} = \sum_{k=0}^{n-1} C_k \cdot C_{n-k-1}$$
+\end{proof}
+
+Вывод: $C_n$~-- это числа Каталана. $C_n =\frac{1}{n+1} \cdot \comb{2n}{n}$.
+
+Производящая функция: $f(t) = \mysum_{n=0}^{\infty} C_n t^n = \frac{1}{2t}(1-\sqrt{1-4t}), |t| \leq \frac14$.
+
+\begin{theorem}[распределение момента возвращения в ноль]
+$$P(S_1 \neq 0, \dots, S_{2n-1} \neq 0, S_{2n} = 0) = \frac{1}{2n-1}\comb{2n}{n}(pq)^n$$
+\end{theorem}
+\begin{proof}
+\begin{eqnarray*}
+&&P(S_1 \neq 0, \dots, S_{2n-1} \neq 0 , s_{2n} = 0) = \\
+&&2\tilde{C_n} (pq)^n = \text{| утв.1 |} = \\
+&&2 C_{n-1} (pq)^n = \\
+&&\frac2n C_{2n-2}{n-1} (pq)^n = \\
+&&\frac{2n}{n\cdot n} C_{2n-2}^{n-1}(pq)^n = \\
+&&\frac{1}{2n-1}C_{2n}^{n}(pq)^n.
+\end{eqnarray*}
+\end{proof}
+
+\begin{theorem}[вероятность возвращения в ноль]
+
+$$P(\{S_n, n \geq 1\} \text{вернется в ноль}) = 1 - |p-q|$$
+\end{theorem}
+\begin{proof}
+\begin{eqnarray*}
+&& P(\{S_n, n >= 1\} \text{вернется в 0}) = \\
+&& \mysum_{n=1}^{\infty} P(S_1 \neq 0, \dots, S_{2n} = 0) = \\
+&& \mysum_{n=1}^{\infty} 2 \tilde{C_N} (pq)^n = \\
+&& \mysum_{n=1}^{\infty} 2 C_{n-1} (pq)^n = \\ 
+&& \mysum_{n=0}^{\infty} 2 C_n(pq)^{n-1} = \\
+&& 2 pq \cdot f(pq) = \\
+&& 2 pq * \frac{1}{2pq}(1 - \sqrt{1-4pq}) = |\text{ т.к. } (p+q)^2 = 1| = \\
+&& 1 - \sqrt{(p-q)^2} = 1 - |p-q|
+\end{eqnarray*}
+\end{proof}
+
+\begin{corollary}
+Симметричное случайное блуждание на прямой возвратно с вероятностью 1.
+\end{corollary}
+
+\subsection{Среднее время нахождения в нуле}
+Пусть $(S_n, n \in \myN)$~-- простейшее симметричное случайное блуждание на прямой.
+Обозначим через $L_n(0)$ число нулей в последовательности $S_k, k = 0 \dots n$.
+\underline{Вопрос}: $EL_n(0) \sim ?$
+
+\begin{lem}
+$$EL_n(0) = E|S_{n+1}|$$
+\end{lem}
+\begin{proof}
+Рассмотрим $|S_{n+1}|$.
+$$
+|S_{n+1}| = |S_n + \xi_{n+1}| = \left\lbrace
+\begin{array}{l r}
+	S_n + \xi_{n+1}, & S_n > 0 \\
+	1, & S_n = 0 \\
+	-(S_n + \xi_{n+1}), & S_n < 0
+\end{array}
+\right.
+$$
+
+$|S_{n+1}| = (S_n + \xi_{n+1})\ind{S_n > 0} + \ind{S_n = 0}
+- (S_n + \xi_{n+1}) \ind{S_n < 0} =
+\ind{S_n = 0} + (S_n + \xi_{n+1}) \sign(S_n)$
+
+Отсюда $|S_{n+1}| = \ind{S_n = 0} + |S_n| + \xi_{n+1} \sign(S_n) = $ |индукция|
+$ = \mysum_{k=0}^n (\ind{S_k = 0} + \xi_{k+1} \sign(S_k)) = L_n(0) +
+\mysum_{k=0}^n \xi_{k+1}\sign(S_k)$.
+
+Берем матожидание у обеих частей равенства:
+$E|S_{n+1}| = EL_n(0) + \mysum_{k=0}^nE(\xi_{k+1}\sign(S_k)) =
+EL_n(0) + \mysum_{k=0}^n E\xi_{k+1} E\sign(S_k) = EL_n(0)$.
+\end{proof}
+
+Согласно ЦПТ,
+$\frac{S_n}{\sqrt{n}} \overset{d}{\to} \eta \sim \mathcal{N}(0, 1)$.
+
+По теореме о наследовании сходимости
+$\frac{|S_n|}{\sqrt{n}} \overset{d}{\to} |\eta| \sim |\mathcal{N}(0, 1)|$.
+
+\underline{Вопрос}: верно ли данное?
+
+$$E \frac{|S_n|}{\sqrt{n}} \to E|\eta| =
+\int_\myR \frac{1}{\sqrt{\frac{2}{\pi}}} |x| e^{-\frac{x^2}{2}} dx = \sqrt{\frac{2}{\pi}}$$
+
+\begin{definition}
+Множество случайных величин $\{\xi_\alpha, \alpha \in \mathfrak{A}\}$ называется
+\emph{равномерно интегрируемым}, если
+$$\mylim_{c \to +\infty}\sup_{\alpha \in \mathfrak{A}}
+E(|\xi_\alpha| \: \ind{|\xi_\alpha| \geq c}) = 0$$
+\end{definition}
+
+Смысл: <<хвосты>> распределения равномерно малы.
+
+\begin{theorem}[б/д]
+Пусть $\{\xi_n, n \in \myN\}$~-- с.в., $\xi_n \overset{d}{\to} \xi$. Тогда 
+$$E\xi_n \to E\xi \Leftrightarrow \{\xi_n, n \in \myN\} \text{ равномерно интегрируемо}$$
+\end{theorem}
+\begin{remark}
+Если сходимость $\overset{p}{\to}$ или $\overset{\text{п.н.}}{\to}$, то равномерная интергрируемость $\Leftrightarrow \xi_n \overset{L_1}{\to} \xi$.
+\end{remark}
+
+\begin{theorem}[достаточное условие равномерной интегрируемости]
+Пусть $\{\xi_n, n \in \myN\}$~-- с.в., $G(t) \geq 0: \frac{G(t)}{t} \to +\infty
+\text{ при } t \to +\infty$.
+Если $\mysup_n EG(|\xi_n|) < +\infty$, то последовательность равномерно интегрируема.
+\end{theorem}
+\begin{proof}
+Положим $M = \mysup_n EG(|\xi_n|)$. $\forall \eps > 0$ положим $a = \frac{M}{\eps}$.
+Возьмем $c > 0: \frac{G(t)}{t} > a \; \forall t > c$. Тогда
+$\forall t > c, \forall n \in \myN$
+
+$$E(|\xi_n|\ind{|\xi_n| \geq t}) \leq E\pars{\frac{G(|\xi_n|)}{a} \ind{|\xi_n| >= t}} \leq
+E\frac{G(|\xi_n|)}{a} \leq \frac{M}{a} = \eps$$
+$\Leftrightarrow \{\xi_n, n \in \myN\}$ равномерно интегрируема.
+\end{proof}
+
+\begin{theorem}[среднее время в нуле]
+$$EL_n(0) \sim \sqrt{\frac{2n}{\pi}}$$
+\end{theorem}
+\begin{proof}
+Согласно лемме, $EL_n(0) = E|S_{n+1}|$. Покажем, что
+$\{\xi_n = \frac{S_n}{\sqrt{n}}\}$ равномерно интегрируема. Подберем соответствующую функцию $G$.
+Попробуем $G(t) = t^2$.
+
+$$EG(|\xi_n|) = E\xi_n^2 = \frac{(E\xi_n^2)}{n} = \frac{DS_n}{n}
+= \frac{\mysum_{k=1}^n D\xi_k}{n} = \frac{n}{n} = 1$$
+
+Согласно достаточному условию, получили, что последовательность $\frac{|S_n|}{\sqrt{n}}$ равномерно
+интегрируема. Тогда по теореме
+$$\frac{E|S_n|}{\sqrt{n}} \to E\eta = \sqrt{\frac{2}{\pi}} (\eta \sim \mathcal{N}(0, 1))$$
+
+Отсюда
+$$EL_n(0) = E|S_{n+1}| \sim \sqrt{\frac{2(n+1)}{\pi}} \sim \sqrt{\frac{2n}{\pi}}$$
+\end{proof}
+
+\subsection{Свойства траекторий}
+\begin{theorem}[закон повторного логарифма, б/д]
+$$P \pars {\mylimsup{n\to\infty} \frac{S_n}{\sqrt{2n \ln \ln n}} = 1 } = 1$$
+\end{theorem}
+\begin{corollary}
+$$P \pars {\myliminf{n\to\infty} \frac{S_n}{\sqrt{2n \ln \ln n}} = -1 } = -1$$
+\end{corollary}
+\begin{proof}
+Рассмотрим $X_n = -S_n$~-- симметричное случайное блуждание $\Leftrightarrow$ по ЗПЛ
+получаем, что 
+$$ \text{п.н. } 1 = \mylimsup{n}\frac{X_n}{\sqrt{2n \ln \ln n}} =
+-\myliminf{n}\frac{S_n}{\sqrt{2n \ln \ln n}}$$
+\end{proof}
+
+Смысл: 
+--- рис.5 ---
+
+
+ЗПЛ означает, что с вероятностью $1$ траектория случайного блуждания начиная с некоторого
+момента лежит внутри между кривыми $\pm(1+\eps)\sqrt{2n \ln \ln n}$ и в то же время
+бесконечно много раз выходит в обе стороны из области, ограниченной кривыми
+$\pm(1-\eps)\sqrt{2n \ln \ln n}$.
+
+
+\section{Ветвящиеся процессы Гальтона-Ватсона}
+Физическая модель: --- рис.6 ---
+В каждый следующий момент времени каждая частица распадается на некоторое случайное число
+таких же частиц.
+
+Мат. модель:
+Пусть $\xi$~-- случайная величина со значениями в $\myZ_+$.
+$\{\xi_k^{(n)}, k, n \in \myN\}$~-- независимые случайные величины с тем
+же распределением, что и $\xi$. Положим
+
+$$X_0 = 1, X_1 = \xi_1^{(1)}, X_n = \mysum_{k=1}^{X_{n-1}} \xi_k^{(n)}$$
+
+\begin{definition}
+$\{X_n, n \in \myZ_+\}$~-- \emph{ветвящийся процесс Гальтона-Ватсона}, построенный по с.в. $\xi$.
+\end{definition}
+
+\begin{itemize}
+\item $X_n$~-- число частиц в $n$-м поколении
+\item $\xi_k^{(n)}$~-- число потомков $k$-й частицы в $n-1$-м поколении
+\end{itemize}
+
+\underline{Вопрос}: какова вероятность вырождения процесса?
+
+\subsection{Производящие функции}
+\begin{definition}
+Пусть $\xi$~-- случайная величина. Тогда ее \emph{производящей функцией} называется
+$$\phi_\xi(z) = Ez^\xi, z \in \myR$$
+\end{definition}
+
+\paragraph{Свойства производящих функций}
+
+\begin{enumerate}
+\item $\phi_\xi(1) = 1$
+\item $\phi'_\xi(1) = E\xi$
+\item Если $\xi$ и $\eta$ независимы, то $\phi_{\xi + \eta}(z) = \phi_\xi(z) \phi_\eta(z)$
+\end{enumerate}
+
+Если $\xi$ принимает значения в $\myZ_+$, то введем $p_k = P(\xi = k), k \in \myZ_+$.
+
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item $\phi_\xi(z) = \mysum_{k=0}^{\infty}z^k p_k$
+\item $\phi_\xi(0) = p_0$
+\item $p_k = \frac{f_\xi^{(k)}(z)}{k!}$
+\item Ряд для $\phi_\xi(z)$ сходится абсолютно и равномерно в области $\{|z| \leq 1\}$
+\item $\phi_\xi(z)$ непрерывно дифференцируема бесконечное число раз в области $\{|z| < 1\}$
+\end{enumerate}
+
+Пусть далее $\{X_n, n \in \myZ_+\}$~-- ветвящийся процесс Г.-В., построенный по $\xi$.
+
+\begin{lem} \label{lem:phi_xi_n}
+$$\phi_{X_{n_1}}(z) = \phi_{X_n}(\phi_\xi(z))$$
+\end{lem}
+\begin{proof}
+$\phi_{X_{n+1}}(z) = Ez^{X_{n+1}}$
+
+$$
+ E \pars {z^{X_{n+1}} | X_n = m} =
+ E \pars {z^{\mysum_{k=1}^{X_n} \xi_k^{(n+1)}} \vline X_n = m} =
+ E \pars {z^{\mysum_{k=1}^m \xi_k^{(n+1}} \vline X_n = m} =
+ E z^{\mysum_{k=1}^m \xi_k^{(n+1)}} =
+ (\phi_\xi(z))^m
+$$
+
+Значит,
+$$\phi_{X_{n+1}} = Ez^{X_{n+1}} = E(E(z^{X_{n+1}}|X_n)) =
+E(\phi_\xi(z))^m \vline_{m = X_n} = \phi_{X_n}(\phi_\xi(z))$$
+\end{proof}
+
+\begin{corollary} \forcenewline
+\begin{enumerate}
+\item $\phi_{X_n}(z) =
+	\underset{n \text{ раз}}{\underbrace{\phi_\xi(\phi_\xi(\dots\phi_\xi(}} z)\dots))$
+\item $\phi_{X_{n+1}}(z) = \phi_\xi(\phi_{X_n}(z))$
+\begin{proof}
+Применяем индуктивно лемму \ref{lem:phi_xi_n}:
+$$\phi_{X_{n+1}} = 
+	\underset{n+1 \text{ раз}}{\underbrace{\phi_\xi(\phi_\xi(\dots\phi_\xi(}} z)\dots)) =
+	\phi_\xi(\phi_{X_n}(z))$$
+\end{proof}
+\end{enumerate}
+\end{corollary}
+
+\subsection{Вероятность вырождения процесса} \forcenewline
+Положим $q_n = P(X_n = 0)$, $q = P(\text{процесс выродился}) = P(\exists n: X_n = 0)$
+\begin{lem}
+$$q_n \leq q_{n+1} \text{  и  } q = \mylim_n q_n$$
+\end{lem}
+\begin{proof}
+$\{X_n = 0\} \subset \{X_{n+1} = 0\} \Rightarrow q_n \leq q_{n+1}$
+
+Но $P(\exists n: X_n = 0) = P\pars{\mybigcup_n \{X_n = 0\}} =$
+|по непрерывности вероятностной меры| $ = \mylim_n P(X_n = 0) = \mylim_n q_n$.
+\end{proof}
+
+\end{document}
