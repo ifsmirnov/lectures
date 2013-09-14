@@ -1,0 +1,175 @@
+% Title
+
+\documentclass[a4paper, 10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{tikz} % some graphics
+%\usepackage[indentheadings]{russcorr}
+\usepackage{geometry}
+\usetikzlibrary{arrows}
+\setlength{\parindent}{0pt}
+
+
+\geometry{left=2cm}
+\geometry{right=2cm}
+\geometry{top=2cm}
+\geometry{bottom=2cm}
+
+\hfuzz=18pt
+
+% Commands
+
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}%
+{\hbox{$\mathsurround=0pt #1$}}{}} % a\hm=b makes "=" carriable to the next line with duplication of the sign
+
+\newcommand{\combus}[2]{\left(\begin{array}{c}#1 \\ #2 \end{array} \right)} % american style for C_n^k
+\newcommand{\combru}[2]{C_{#1}^{#2}} % russian C_n^k
+\newcommand{\comb}[2]{\combru{#1}{#2}}
+\newcommand{\myN}{\mathbb{N}} % nice letters for common number sets
+\newcommand{\myZ}{\mathbb{Z}}
+\newcommand{\myR}{\mathbb{R}}
+\newcommand{\myC}{\mathbb{C}}
+\newcommand{\myQ}{\mathbb{Q}}
+\newcommand{\myE}{\mathcal{E}} % basis
+\newcommand{\myF}{\mathcal{F}} % basis
+\newcommand{\mysetP}{\mathcal{P}}
+\newcommand{\mysetR}{\mathcal{R}}
+\newcommand{\mysetM}{\mathcal{M}}
+\newcommand{\mysetN}{\mathcal{N}}
+\newcommand{\mysetX}{\mathcal{X}}
+\newcommand{\walls}[1]{\left | #1 \right |} % |smth_vertically_large|
+\newcommand{\pars}[1]{\left( #1 \right)} % (smth_vertically_large)
+\newcommand{\class}[1]{[ #1 ]} % [smth_vertically_large]
+\newcommand{\bra}[1]{\langle #1 \rangle} % brackets for span of vectors, eg. <e_1, ..., e_k>
+\newcommand{\myset}[1]{\left\{ #1 \right\}} % because { and } are special symbols in TeX
+\newcommand{\mysetso}[2]{\myset{#1 \mid #2}} 
+\newcommand{\myforall}[1]{\forall #1:}
+\newcommand{\myexists}[1]{\exists #1:\ }
+\newcommand{\forcenewline}{\ \newline}
+\newcommand{\reversein}{\ni}
+\renewcommand{\phi}{\varphi}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\ind}[1]{\mathrm{I}\{ #1 \}}
+\newcommand{\myliminf}[1]{\underset{ #1 }{\underline{\lim}}}
+\newcommand{\mylimsup}[1]{\underset{ #1 }{\overline{\lim}}}
+
+%
+% Example text:
+% M = {x^2 | x is prime}
+% 
+% Corresponding markup:                               
+% $$ \mysetM = \mysetso{x^2}{x \text{ is prime}} $$
+%
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+\newcommand{\myempty}{\varnothing}
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\myand}{\;\; \hm\& \;\;}				
+\newcommand{\myor}{\; \hm\vee \;}					
+\newcommand{\conj}[1]{\overline{#1}} % complex conjugation
+\newcommand{\mycirc}{\circ}
+\newcommand{\poly}[2]{#1 [ #2 ]} % ring of polynomials 
+\newcommand{\Rx}{\poly{\myR}{x}}
+\newcommand{\Cx}{\poly{\myC}{x}}
+\newcommand{\mydim}[1]{\dim #1}
+\newcommand{\mycodim}[1]{\text{codim} #1}
+\newcommand{\coords}[2]{\pars{#1}_{#2}}
+\newcommand{\myrank}[1]{\text{rank} #1}
+\newcommand{\mysegment}[2]{[#1, #2]} 				
+\newcommand{\myinterval}[2]{(#1, #2)} 				
+\newcommand{\mypair}[2]{(#1, #2)}			
+\newcommand{\myfunc}[3]{#1\!:\,#2 \hm\to #3} % TODO: make spaces between elements of this tag look better
+\newcommand{\suchthat}{\!:\,}					
+\newcommand{\mydef}[1]{\emph{#1}}
+
+% Arrows
+\newcommand{\myright}{\;\hm\Rightarrow\;}
+\newcommand{\myleft}{\;\hm\Leftarrow\;}
+\newcommand{\myleftright}{\;\hm\Leftrightarrow\;}
+% \newcommand{\vect}[1]{\overrightarrow{\vphantom{b}#1}}
+\newcommand{\vect}[1]{\Vec{\vphantom{b}#1}}
+
+% Sums, prods and other things with \limits
+\newcommand{\mysum}{\sum\limits}
+\newcommand{\myprod}{\prod\limits}
+\newcommand{\mylim}{\lim\limits}
+\newcommand{\mysup}{\sup\limits}
+\newcommand{\myinf}{\inf\limits}
+\newcommand{\mybigcup}{\bigcup\limits}
+\newcommand{\mybigcap}{\bigcap\limits}
+\newcommand{\mybigor}{\bigvee\limits}
+\newcommand{\mybigand}{\bigwedge\limits}
+\newcommand{\mybigxor}{\bigoplus\limits}
+\newcommand{\xor}{\oplus}
+\newcommand{\eq}{\equiv}
+
+\newcommand{\smatrix}[1]{\begin{smallmatrix}#1\end{smallmatrix}}
+\newcommand{\psmatrix}[1]{\pars{\begin{smallmatrix}#1\end{smallmatrix}}}
+\newcommand{\wsmatrix}[1]{\walls{\begin{smallmatrix}#1\end{smallmatrix}}}
+
+
+\newcommand{\abs}[1]{|#1|}
+% Operators
+\DeclareMathOperator{\pr}{pr} % Проекция
+\DeclareMathOperator{\Tr}{Tr} % След
+\DeclareMathOperator{\mychar}{char} % Характеристика поля
+\DeclareMathOperator{\id}{id} % Тождественное преобразование
+\DeclareMathOperator{\rk}{rk} % Ранг
+\DeclareMathOperator{\Kernel}{Ker}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\sign}{sign} % Знак
+\DeclareMathOperator{\sgn}{sign} % Знак
+\DeclareMathOperator{\const}{const}
+
+% Special theorems
+\newtheorem*{theorem-menelaus}{Теорема Менелая}
+
+% Theorems
+\newtheorem*{theorem-star}{Теорема}
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem*{theorem-definition-star}{Теорема-определение}
+\newtheorem*{corollary-star}{Следствие}
+\newtheorem{corollary}{Следствие}[section]
+\newtheorem*{property-star}{Свойство}
+\newtheorem*{properties}{Свойства}
+\newtheorem{property}{Свойство}
+\newtheorem*{lem-star}{Лемма}
+\newtheorem{lem}{Лемма}[section]
+\newtheorem*{proposition-star}{Предложение}
+\newtheorem{proposition}{Предложение}
+\newtheorem{stage}{Этап}
+\newtheorem*{statement}{Утверждение}
+\newtheorem*{designation}{Обозначение}
+\newtheorem*{usage}{Использование}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Замечание}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Задача}
+\newtheorem{exercise}{Упражнение}
+
+\theoremstyle{definition}
+\newtheorem*{definition-star}{Определение}
+\newtheorem{definition}{Определение}[section]
+
+\theoremstyle{definition}
+\newtheorem*{example-star}{Пример}
+\newtheorem{example}{Пример}
+\newtheorem*{examples}{Примеры}
+\newtheorem{algorithm}{Алгоритм}
+\newtheorem{case}{Случай}
+\newtheorem*{case-star}{Случай}
+
+% Style
+\newcommand{\tocstyle}{\setlength{\parindent}{0ex} \setlength{\parskip}{0ex}}
+\newcommand{\mainstyle}{\setlength{\parindent}{0ex} \setlength{\parskip}{1ex}}
+
+\mainstyle
+\setcounter{secnumdepth}{2}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+
+
+% Titles of lectures
+\newcommand{\mylecture}[1]{\setcounter{secnumdepth}{-1} \section{#1} \setcounter{secnumdepth}{2} \setcounter{subsection}{0} \setcounter{corollary}{0} \setcounter{definition}{0} \setcounter{theorem}{0}}
