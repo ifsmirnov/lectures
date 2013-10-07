@@ -457,4 +457,748 @@ $\{X_n = 0\} \subset \{X_{n+1} = 0\} \Rightarrow q_n \leq q_{n+1}$
 |по непрерывности вероятностной меры| $ = \mylim_n P(X_n = 0) = \mylim_n q_n$.
 \end{proof}
 
+\begin{lem}
+Вероятность вырождения $q$ является решением уравнения
+$$s = \phi_\xi(s)$$
+\end{lem}
+\begin{proof}
+$$
+q \leftarrow q_n = P(X_n = 0) = \phi_{X_n}(0) = \phi_\xi(\phi_{X_{n-1}}(0)) = \phi_\xi(q_{n-1})
+\to \phi_\xi(q)
+$$
+\end{proof}
+
+Вопрос: что делать, если на $[0,1]$ решений несколько?
+
+Всегда есть решение $s = 1$.
+
+\begin{theorem}[о вероятности вырождения]
+
+Пусть $\xi \neq 1$ п.н. Пусть $\mu = E\xi$ (м.б. $\mu = +\infty$). Тогда
+\begin{enumerate}
+\item Если $\mu \leq 1$, то уравнение
+$$s = \phi_\xi(s)$$
+имеет только одно решение $s = 1$ на $[0, 1]$. Тогда $q = 1$.
+\item Если $\mu > 1$, то уравнение
+$$s = \phi_\xi(s)$$
+имеет единственное решение $s_0 \in [0, 1)$. В этом случае $q = s_0$.
+\end{enumerate}
+\end{theorem}
+\begin{proof} \forcenewline
+\begin{enumerate}
+\item Рассмотрим производную $\phi'_\xi(s) = \mysum_{k=1}^{\infty}k s^{k-1}P(\xi = k)$
+для $s \in [0, 1]$. Заметим, что эта функция строго возрастает (поскольку каждое слагаемое
+строго возрастает) и положительна (поскольку есть хоть одна ненулевая вероятность).
+Действительно, если $\phi_\xi(s) = 0$ для $s > 0 \Rightarrow P(\xi = k) = 0 \; \forall k \geq 1$.
+Но тогда $P(\xi = 0) = 1$ и $q = 1$.
+
+Далее считаем производную положительной.
+
+Для $s \in (0, 1)$:
+$$
+1 - \phi_\xi(s) = \phi'_\xi(\theta)(1-s)
+$$
+где $\theta = \theta(s) \in (s, 1)$
+Но $\phi'_\xi(\theta) < \phi'_\xi(1) = \mu = 1$, т.к. производная строго возрастает.
+$$\Rightarrow 1 - \phi_\xi(s) < 1-s \text{ при } s \in [0, 1) \Rightarrow s < \phi_\xi(s)$$
+Решений, отличных от $1$, нет.
+
+График в этом случае выглядит так:
+--- рис.7 ---
+
+\item Рассмотрим 
+$$\phi''_\xi(s) = \mysum_{k=2}^{\infty} k(k-1)s^{k-2}P(\xi = k) \text{ для } s \in [0, 1)$$
+Функция строго возрастает и положительна на $(0, 1)$.
+
+Действительно, если вдруг
+$\phi''_\xi(s) = 0 \Rightarrow \forall k \geq 2 \; P(\xi=k) = 0 \Rightarrow
+\xi < 1 \text{ п.н. } \Rightarrow E\xi = \mu \leq 1$, что противоречит условию.
+
+Теперь считаем, что $\phi'_\xi(s)$ строго возрастает на $[0, 1)$. 
+$$\Rightarrow 1 - \phi'_\xi(s) \text{ меняет знак на } [0, 1) \text { не более одного раза }$$
+
+$$1 - \phi'_\xi(0) = 1 - P(\xi = 1) >  0$$
+$$1 - \phi'_\xi(1) = 1 - \mu < 0$$
+$$\Rightarrow 1 - \phi'_\xi(s) \text{ меняет знак ровно один раз}$$
+
+График выглядит так:
+--- рис.8 ---
+
+Пусть $\phi'_\xi(s_1) = 1$. Что можно сказать про $s - \phi_\xi(s)$?
+При $s < s_1$ возрастает, при $s > s_1$ возрастает.
+
+Если $\phi_\xi(0) = P(\xi = 0) = 0$, то $s - \phi_\xi(s) \vline_{s=0} = 0$ --- рис.9 ---,
+то есть ровно один корень $s = 0 \in [0, 1)$. Ясно, что в этом случае $\boxed{q = 0}$.
+
+Если $\phi_\xi(0) > 0$, то $s - \phi_\xi(s) \vline_{s = 0} < 0$
+$\Rightarrow \exists s_0$~-- единственное решение уравнения на $[0, 1)$
+
+Заметим, что при $s < s_0 \; s < \phi_\xi(s)$, а при $s > s_0 \; s > \phi_\xi(s)$.
+
+Но $q_n = \phi_\xi(q_{n-1}) \leq$ |т.к. $q_n \geq q_{n-1}$| $ \leq \phi_\xi(q_n)
+\Rightarrow q_n \notin(s_0, 1)$.
+
+Если $q_n = 1$, то $q_{n-1} = 1$, т.к. $\phi_\xi(s) = 1 \Leftrightarrow s = 1$.
+По индукции получаем, что $q_0 = 1$. Но $q_0 = 0$, т.к. в нулевой момент времени
+всегда есть одна частица.
+Значит, $q \in [0, s_0]$ как предел $q_n \Rightarrow q = s_0$.
+
+График: --- рис 11 --- 
+\end{enumerate}
+\end{proof}
+
+\underline{Вывод:} вероятность вырождения~-- это наименьший корень уравнения $s = \phi_\xi(s)$
+из отрезка $[0, 1]$.
+
+\underline{Интерпретация:} если среднее число потомков меньше $1$, то процесс обречен на вымирание.
+Иначе есть ненулевая вероятность того, что мы будем живы до бесконечности.
+
+\section{Конечномерные распределения случайных процесов}
+Пусть $(X_t, t \in T)$~-- случайный процесс на $(\Omega, F, P)$, и $X_t$  принимает
+значения в $(S_t, \myB_t)$.
+
+\begin{definition}
+Множество $S = \myprod_{t\in T} S_t $ называется \emph{пространством траекторий случайного процесса}.
+\end{definition}
+%% поставить нормальный крестик
+
+$$S = \{y = (y(t), t \in t): \forall t \in T \; y(t) \in S_t\}$$
+
+\begin{definition}
+Для $\forall t \in T$ и $B_t \in \myB_t$ введем \emph{элементарный цилиндр}
+с основанием $B_t$:
+$$C(t, B_t) = \{y \in S: y(t) \in B_t\}$$
+\underline{Смысл:} это все траектории, проходящие через $B_t$  в момент времени $t$.
+--- рис.12 --- \forcenewline
+\end{definition}
+
+\begin{definition}
+Минимальная $\sigma$-алгебра $\myB_T$, содержащая все эти элементарные цилиндры,
+называется \emph{цилиндрической $\sigma$-алгеброй} на $S$.
+
+$$\myB_T = \sigma\{C(t, B_t): t \in T, B_t \in \myB_T\}$$
+\end{definition}
+
+$(S, \myB_T)$~-- измеримое пространство.
+
+\begin{lem}
+$X = (X_t, t \in T)$ является случайным процессом $\Leftrightarrow X: \Omega \to S$
+является измеримым относительно цилиндрической $\sigma$-алгебры $\myB_T$.
+\end{lem}
+
+\rightoffset{
+\underline{Напоминание}
+Критерий измеримости отображения
+
+$X: \Omega \to E, ~ \mathcal{M} \subset \mathcal{E}
+\text{ т.ч. }\sigma(\mathcal{M}) = \mathcal{E}$.
+Тогда $X$~-- с.в. $\Leftrightarrow \forall B \in \mathcal{M} \; X^{-1}(B) \in \mathcal{F}$
+}
+
+\begin{proof}
+
+$(\Rightarrow)$ Для $\forall t X_t$~-- случайный элемент со значениями в $(S_t, \myB_t)$. Рассмотрим 
+$\myM$~-- система элементарных цилиндров в $\myB_T$. По определению $\sigma(\myM) = \myB_T$.
+
+$\forall C(t, B_t) \in \myM$ получаем 
+
+$$X^{-1}(C(t, B_t)) = \{\omega:  X(\omega) \in C(t, B_t)\}
+= \{\omega: X_t(\omega) \in B_t \} = \{X_t^{-1}(B_t) \in \myF\}$$
+т.к. $X_t$~-- случайный элемент.
+
+$(\Leftarrow)$ По критерию измеримости отображения
+$$\forall B \in \myB_T \; X^{-1}(B) \in \myF$$
+\end{proof}
+
+\begin{remark}
+Лемма устанавливает эквивалентное определение случайного процесса как единого случайного
+элемента со значениями в пространстве траекторий.
+\end{remark}
+
+\begin{definition}
+\emph{Распределением} $P_X$ случайного процесса $X =  (X_t, t \in T)$
+называется вероятностная мера на $(S, \myB_T)$
+т.ч. $\forall \myB \in \myB_T \; P_X(B) =  P(X \in B)$.
+\end{definition}
+
+Это определение удобно только в том случае, когда <<время>> конечно.
+Для счетного (или тем более континуального) <<времени>> это определение
+очень трудно для понимания.
+
+\begin{definition}
+Пусть $X = (X_t, t \in T)$~--  случайный процесс, $\forall n \in \myN \;
+\forall t_1, \dots, t_n \in T$
+пусть $P_{t_1, \dots, t_n}$ обозначает распределение вектора $(X_{t_1}, \dots, X_{t_n})$.
+Тогда набор вероятностных мер $\{P_{t_1, \dots, t_n}: n \in \myN, t_i \in T\}$
+называется \emph{набором конечномерных распределений} случайного процесса $X$, а сами
+$P_{t_1, \dots, t_n}$ называются конечномерными распределениями $X$.
+\end{definition}
+
+\rightoffset{
+\underline{Напоминание:}
+$P_{..}$~-- вер.мера на
+$(S_{t_1} \times \dots \times S_{t_n},
+\myB_{t_1} \otimes \dots \otimes \myB_{t_n})$, 
+определенная по правилу ---2---.
+}
+
+\begin{lem}
+Пусть $X$ и $Y$~-- случайные процессы c одинаковым временем, имеющие одно и то же пространство
+траекторий. Тогда $P_X = P_Y \Leftrightarrow$ совпадают их конечномерные распределения.
+\end{lem}
+
+\rightoffset{
+\underline{Напоминание:} \forcenewline
+Единственность продолжения меры
+
+Пусть $(E, \myE)$~-- измеримое пространство, $P, Q$~-- две вероятностные меры на нем.
+Пусть $\myM \subset \myE$~-- $\pi$-система и $\sigma(\myM) =  \myE$. Тогда 
+$$P\vline_\myM = Q\vline_\myM \Leftrightarrow P\vline_\myE = Q\vline_\myE$$
+}
+
+\begin{proof}
+Рассмотрим цилиндры (не элементарные!) в $S$:
+$$ \forall b \; \forall t_1 \dots t_n \in T \;\forall \seq{B}{t_1}{t_n}, B_{t_i} \in \myB_{t_i}
+\text{ определим }C(t_1, \dots ,t_n, B_{t_1}, \dots, B_{t_n}) = \{y \in S: y(t_i) \in B_{t_i} \forall i = 1..n\}$$
+Это пересечения каких-то элементарных цилиндров. Фактически, мы фиксируем значение
+случайного процесса в нескольких моментах времени, а не только в одном, как это делалось
+в случае элементарного цилиндра.
+
+Пусть $\myM$~-- множество цилиндров.
+Заметим, что $\myM$~--  $\pi$-система, причем $\sigma(\myM) = \myB_T$.
+
+$(\Rightarrow)$ Пусть $t_1, \dots, t_n \in T, B_{t_1}, \dots, B_{t_n}, B_{t_i} \in \myB_{t_i}$.
+Тогда
+$$
+\begin{array}{rllll}
+P^X_{t_1, \dots, t_n}(B_{t_1} \times \dots \times B_{t_n}) &=&
+P( (X_{t_1}, \dots, X_{t_n}) \in B_{t_1} \times \dots \times B_{t_n}) = \\
+&&P(X \in C(t_1, \dots, t_n, B_{t_1}, \dots, B_{t_n})) = \\
+&&P_X(C(t_1, \dots, t_n, B_{t_1}, \dots, B_{t_n})) = \\
+&&P_Y(C(t_1, \dots, t_n, B_{t_1}, \dots, B_{t_n})) = \\
+&&P( (Y_{t_1}, \dots, Y_{t_n}) \in B_{t_1} \times \dots \times B_{t_n}) =
+P^Y_{t_1, \dots, t_n}(B_{t_1} \times \dots \times B_{t_n})
+\end{array}
+$$
+Доказали, что распределения $X$ и $Y$ совпадают на прямоугольниках.
+Но $B_{t_1} \times \dots \times B_{t_n}$~-- порождающая $\pi$-система
+для $\myB_{t_1} \otimes \dots \otimes \myB_{t_n} \Rightarrow$
+по единственности продолжения меры $P^x_{t_1 \dots t_n} = P^y_{t_1 \dots t_n}$.
+
+$(\Leftarrow)$
+$$
+\begin{array}{l}
+P_X(C(t_1, \dots, t_n, B_{t_1}, \dots, B_{t_n})) = \\
+P^X_{t_1 \dots t_n}(B_{t_1} \times \dots \times B_{t_n}) = \\ % ???
+P^Y_{t_1 \dots t_n}(B_{t_1} \times \dots \times B_{t_n}) = \\ % ???
+P_Y(C(t_1, \dots, t_n, B_{t_1}, \dots, B_{t_n}))
+\end{array}
+$$
+
+Доказали, что $P_x$ и $P_Y$ совпадают на $\myM$. Но $\myM$~-- порождающая
+$\pi$-система для $\myB_T \Rightarrow$ по единствености продолжения меры
+$P_X = P_Y$.
+\end{proof}
+
+Пусть $P_{t_1 \dots t_n}, n \in \myN, t_1 \dots t_n \in T$~-- конечномерное распределение $(X_t, t \in T)$.
+
+\begin{lem}
+Для $\{P_{t_1 \dots t_n}\}$ выполнены условия симметрии $(1)$ и согласованности $(2)$:
+\begin{enumerate}
+\item $\forall n \; \forall t_1 \dots t_n \in T \; \forall \sigma$~-- перестановки $\{1 .. n\}$ выполнено
+$$P_{t_1 \dots t_n}(B_{t_1} \times \dots \times B_{t_n}) =
+P_{t_{\sigma_1} \dots t_{\sigma_n}} (B_{t_{\sigma_1}} \times \dots \times B_{t_{\sigma_n}})
+$$
+
+\item $\forall n \; \forall t_1 \dots t_n \in T$
+$$P_{t_1 \dots t_n}(B_{t_1} \times \dots \times B_{t_{n-1}} \times S_{t_n}) =
+P_{t_1 \dots t_{n-1}}(B_{t_1} \times \dots \times B_{t_{n-1}})$$
+\end{enumerate}
+
+\begin{proof} \forcenewline
+\begin{enumerate}
+\item $P_{t_1 \dots t_n}(B_{t_1} \times \dots \times B_{t_n})
+= P(X_{t_1} \in B_{t_1}, \dots, X_{t_n} \in B_{t_n})$~-- не зависит от перестановки.
+\item $\{X_{t_n} \in S_{t_n}\} =  \Omega$, поэтому это событие ничего не добавляет в пересечение.
+\end{enumerate}
+
+Пусть теперь $X$~--  вещественный процесс, т.е. $(S_t, \myB_t) = (\myR, \myB(\myR)) \; \forall t \in T$.
+\begin{theorem}[Колмогорова о существовании случайного процесса, б/д]
+Пусть $T$~-- некоторое множество, $\forall n \in \myN \; \forall t_1 \dots t_n \in T$ задана
+вероятностная мера
+$P_{t_1 \dots t_n}$ на $(\myR^n, \myB{\myR^n})$,
+причем для системы $\{P_{t_1, \dots t_n}\}$  выполнены условия симметрии и согласованности.
+Тогда $\exists$ вероятностное пространство $(\Omega, \myF, P)$
+и вещественный случайный процесс $(X_t, t \in T)$
+т.ч. $\{P_{t_1 \dots t_n}\}$~-- это его конечномерные распределения.
+\end{theorem}
+\end{proof}
+\end{lem}
+
+% 26 sep 2013
+\begin{theorem}[условия симметрии и согласованности для характеристических функций]
+Пусть $T$~-- некоторое множество, $\forall t_1, \dots, t_n \in T$ задана вер. мера
+$P_{t_1, \dots, t_n}$ на $(\myR^n, \myB(\myR^n)$ с х.ф. $\phi_{t_1, \dots, t_n}$.
+Тогда $\{P_{t_1, \dots, t_n}, n \in \myN, t_i \in T\}$ обладают условиями симм. и согл. $\Leftrightarrow$
+выполнены условия симметрии и согласованности для х.ф.:
+\begin{enumerate}
+\item $\phi_{t_1, \dots, t_n}(\lambda_1, \dots, \lambda_n) =
+\phi_{t_{\sigma_1}, \dots, t_{\sigma_n}}(\lambda_{\sigma_1}, \dots, \lambda_{\sigma_n})
+$
+\item $\phi_{t_1, \dots, t_n}(\lambda_1, \dots, \lambda_{n-1}, 0) =
+\phi_{t_1, \dots, t_{n-1}}(\lambda_1, \dots, \lambda_n)$
+\end{enumerate}
+\end{theorem}
+
+\begin{corollary}
+Пусть $T \subset \myR$, $\forall n \in \myN \; \forall t_1 < \dots < t_n \in T$
+задана х.ф. $\phi_{t_1, \dots, t_n}$ в $\myR^n$. Тогда
+
+$$\exists (\Omega, \myF, P) \text{ и случайный процесс } (X_t, t \in T) \text{ т.ч. }
+\phi_{t_1, \dots, t_n} \text{ -- х.ф. } (X_{t_1}, \dots, X_{t_n})$$
+$$\Leftrightarrow$$
+$$\forall m \; \phi_{t_1, \dots, t_n}(\lambda_1, \dots, \lambda_n) \vline_{\lambda_m = 0} = %\big
+\phi_{t_1, \dots, t_{m-1}, t_{m+1}, \dots, t_n}(\lambda_1, \dots, \lambda_{m-1}, \lambda_{m+1}, \dots, \lambda_n)$$
+\end{corollary}
+
+\begin{proof} \forcenewline
+$(\Rightarrow)$ Очевидно из теоремы Колмогорова и теоремы об условиях симметрии и согласованности
+для хар. функций
+
+$(\Leftarrow)$ Пусть $s_1, \dots, s_n \in T, s_i \neq s_j$, рассмотрим $t_1 < \dots < t_n$ т.ч.
+$t_i = s_{\sigma_i}$ для некоторой перестановки $\sigma$.
+
+Зададим
+$$\phi_{s_1, \dots, s_n}(\lambda_1, \dots, \lambda_n) :=
+\phi_{t_1, \dots, t_n}(\lambda_{\sigma_1}, \dots, \lambda_{\sigma_n})$$
+
+Проверим условия симметрии и согласованности для таких хар. функций.
+
+Условие симметрии дано по построению. Проверим согласованность.
+
+$$
+\begin{array}{l}
+\phi_{s_1, \dots, s_n}(\lambda_1, \dots, \lambda_n) \vline_{\lambda_n=0} = \\
+ |s_n = t_m \Rightarrow \lambda_n = \lambda_{\sigma_m}| = \\
+\phi_{t_1, \dots, t_n}(\lambda_{\sigma_1}, \dots, \lambda_{\sigma_n}) \vline_{\lambda_{\sigma_m} = 0} =\\
+|\text{условие следствия}| =\\
+\phi_{t_1, \dots, t_{m-1}, t_{m+1}, \dots, t_n}
+(\lambda_{\sigma_1}, \dots, \lambda_{\sigma_{m-1}}, \lambda_{\sigma_{m+1}}, \dots, \lambda_{\sigma_n}) = \\
+|\text{по построению}| = \\
+\phi_{s_1, \dots, s_{n-1}}(\lambda_1, \dots, \lambda_{n-1})
+\end{array}
+$$
+
+Условия симметрии и согласованности проверяются аналогично,
+если есть совпадающие $s_i = s_j$.  По теореме Колмогорова искомый процесс существует.
+\end{proof}
+
+\section{Процессы с независимыми приращениями}
+\begin{definition}
+Пусть $(X_t, t \geq 0)$~-- действительный процесс. Он называется \emph{процессом с
+независимыми приращениями}, если $\forall n \in \myN \; \forall \; 0 \leq t_1 < \dots < t_n$
+случайные величины $X_{t_1}, X_{t_2 - t_1}, \dots, X_{t_n - t_{n-1}}$ независимы в совокупности.
+\end{definition}
+
+\begin{theorem}[о существовании процессов с независимыми приращениями]
+Пусть $Q_0$~-- вер. мера на $(\myR, \myB(\myR))$ с х.ф. $\phi_0$,
+и $\forall s,t$ задана вер. мера $Q_{s,t}$ на $(\myR, \myB(\myR))$ с х.ф. $\phi_{s,t}$.
+Тогда процесс с независимыми приращениями
+$$(X_t, t \geq 0) \text{ т.ч. } X_0 \overset{d}{=} Q_0, X_t - X_s \overset{d}{=} Q_{s,t}, s < t$$
+существует тогда и только тогда, когда
+$$\forall \; 0 \leq s < u < t \; \phi_{s,t}(\tau) = \phi_{s,u}(\tau) \phi_{u,t}(\tau)$$
+\end{theorem}
+\begin{proof} \forcenewline
+$(\Rightarrow)$ $\exists X_t \Rightarrow \forall \; s < u < t X_t-X_u$ и 
+$X_u-X_s$ независимы $\Rightarrow \phi_{s,t}(\tau) = \phi_{X_t-X_s}(\tau)=
+\phi_{X_t-X_u+X_u-X_s}(\tau) =
+\phi_{X_t-X_u}(\tau) \phi_{X_u-X_s}(\tau) =
+\phi_{u,t}(\tau) \phi_{s,u}(\tau)$.
+
+$(\Leftarrow)$ Пусть $X_t$ существует. Тогда $\forall 0 < t_1 < \dots < t_n$
+случайные величины. $(X_tn-X_tn-1, ..., X_t1-X_0, X_0)$ независимы. Обозначим этот вектор как $\xi$.
+% 
+% $\phi_\xi(\ln .. l0) = \phi_{X_tn-X_t{n-1}}(l1) * ... * (\phi_{X_0})(l0)} =
+% \phi_{t_n,t_{n-1}}(...)$
+% 
+% Рассмотрим $\eta = (X_tn, ..., X_0)^t$. Ясно,  что $\eta = A\xi$, где
+% 
+% $A = $ ---матр.1---
+% 
+% $\Rightarrow \phi_\eta(\lambda vector) = Ee^{i <\eta, \lambda v>} = $
+% записи на бумажке
+% 
+% Теперь забудем про то, что процесс существует. 
+% $\forall n \forall t_1 < ... t_n$ зададим $\phi_t1..tn$ по формуле $(*)$.
+% 
+% Проверим условия следствия: пусть $l_m = 0$.
+% ---опять записи на бумажке---
+% 
+% Смотрим на две подчеркнутые штуки.
+% 
+% По условию $\phi_tm-1 tm(\tau) \phi_tm tm+1(\tau) = \phi_tm-1 tm+1(\tau)$.
+% 
+% --- тут то, что после равно в кружочке --
+% 
+% 
+% Согласно следствию, $\exists (X_t, t \geq 0)$ т.ч.
+% $\phi_tn .. t1$~-- х.ф. $(X_tn .. X_t1)$. По построению $\phi_t1..tn$
+% это означает, что $X_t$ имеет независимые приращения, $X_t - X_s \overset{d}{=}
+% Q_{s,t}, t > s$, и $X_0 \overset{d}{=} Q_0$.
+\end{proof}
+
+% 
+% \begin{remark}
+% \begin{itemize}
+% \item Процесс с независимыми приращениями с дискретным временем~-- это случайное блуждание.ы
+% \item Если $\phi_{\xi+\eta}(t) = \phi_\xi(t) \phi_\eta(t)$, то это не значит,
+% что $\xi$ и $\eta$ независимы.
+% \end{itemize}
+% \end{remark}
+% 
+% \subsection{Пуассоновский процесс}
+% \begin{definition}
+% Процесс $N_t, t \geq 0$ называется \emph{пуассоновским процессом интенсовности $\lambda > 0$},
+% если
+% \begin{enumerate}
+% \item $N_0 = 0$ п.н.
+% \item $N_t$ имеет независимые приращения
+% \item $N_t - N_s \tilde Pois(\lambda(t-s)), t > s \geq 0$
+% \end{enumerate}
+% \end{definition}
+% 
+% \begin{statement}
+% Пуассоновский процесс существует.
+% \end{statement}
+% \begin{proof}
+% Пусть $\phi_s,t$~-- х.ф. $Pois(\lambda(t-s))$. Тогда
+% $$\phi_{s,t}(\tau) = ... = e^{\lambda(t-s)(e^{i\tau} - 1)}$$
+% 
+% Отсюда видно, что $\forall s < u < t$
+% $$\phi_{s,u}(\tau) \phi_{u,t}(\tau) = \phi_{s,t}(\tau)$$
+% Значит, по критерию существования пуассоновский процесс существует.
+% \end{proof}
+% 
+% \paragraph{Свойства траекторий}
+% \begin{enumerate}
+% \item Целочисленные: $N_t \in \myZ_+, t \geq 0$
+% \item Неубывающие: $N_t - N_s \geq 0, t > s$
+% \end{enumerate}
+% Вопросы:
+% \begin{enumerate}
+% \item размер скачков?
+% \item распределение моментов скачков
+% \end{enumerate}
+% 
+% \begin{theorem}[явная конструкция пуассоновского процесса]
+% Пусть $\{\xi_n, n \in \myN\}$~-- нез. $\tilde Exp(\lambda)$, $S_n =  \xi_1 + \dots + \xi_n$.
+% Тогда процесс восстановления
+% $$X_t = \sup\{n: S_n \leq t\}$$
+% является пуассоновским процессом интенсивности $\lambda$.
+% \end{theorem}
+% \begin{proof}
+% Пусть $X_0 = 0$.
+% Рассмотрим вектор $(S_n, \dots, S_1)$. Он имеет плотность:
+% $$P_{S_n..S_1}(x_1..x_1) = P_{\xi_n .. \xi_1}(X_n-x_{n-1}, ..., X_2-X_1, X_1) =
+% |\xi_i \tilde Exp(\lambda)| = \prod_{k=1}^{n} \lambda e^{-(x_k-x_k-1)\lambda} \ind{X_k > X_k-1} =
+% \lambda^n e^{-\lambda X_n} \ind{x_n > \dots > x_1 > 0}$$
+% 
+% Зафиксируем $0 < t_1 < ... < t_n$ и $k_n \geq ... \geq k_1, k_i \in \myZ_+$. Рассмотрим
+% $$P(X_tn - X_tn-1 = k_n-k_n-1, ..., X_t1 = k1)$$
+% 
+% Что такое X_tn - X_tn-1? Это количество скачков, которые совершает процесс на отрезке $tn-1, tn$.
+% 
+% $$ = P(S_k1 < t1, \{S_k1+1, ... S_k2\} \in (t1, t2], ..., \{S_{k_{n-1}+1}, .., S_kn\}
+% \in (t_n-1, tn], S_{k_n+1} > t_n) =$$
+% |подставляем плотность $p_{s1..s_{k_n + 1}} =$|
+% интегрируем в области, написанной на бумажке.
+% 
+% дальше много всего на бумажке
+% 
+% Следовательно, $X_t$ имеет независимые приращения, и эти приращения пуассоновские:
+% 
+% $$X_{t_j} - X_{t_{j-1}} \tilde Pois(\lambda(t_j - t_{j-1}))$$
+% 
+% Значит, $X_t$~-- это пуассоновский процесс.
+% \end{proof}
+% \begin{corollary}
+% Пусть $N_t$~-- пуассоновский процесс интенсивности $\lambda > 0$, $Y_n$~-- 
+% момент $n$-того скачка. Тогда
+% \begin{enumerate}
+% \item П.н. все скачки $N_t$ имеют размер $1$
+% \item $Y_n \tilde \Gamma(\lambda, n)$, записать плотность
+% \item $Y_n-Y_{n-1}, ..., Y_1$~-- нез. $Exp(\lambda)$.
+% \end{enumerate}
+% \begin{proof}
+% \begin{enumerate}
+% \item Пусть $X_t$~-- явная конструкция из теоремы.
+% 
+% $P($У $N_t$ есть скачок размера $\geq 2) = P($ у $X_t$ есть скачок размера $\geq 2) =
+% P(\exists n: S_n = S_{n+1}) = P(\exists n; \xi_n = 0) = 0$, т.к. $\xi_n$ абсолютно непрерывны.
+% 
+% \item 2 и 3 выполнены для $X_t$ по построению $\Rightarrow$ верны и для $N_t$.
+% \end{enumerate}
+% \end{proof}
+% \end{corollary}
+% \end{document}
+
+\section{Гауссовские случайные процессы}
+
+\rightoffset{
+\begin{definition}
+Случайный вектор $\xi =  \seq{\xi}{1}{n}$ называется гауссовским, если его х.ф. имеет вид
+
+$$\phi_\xi(t) = e^{i<a,t> - \frac{1}{2}<\Sigma t, t>}$$
+
+где $a \in \myR^n$, а $\Sigma \in Mat(n\times n)$~-- симметрическая и неотрицательно определенная.
+В этом случае пишут $\xi \tilde N(a, \Sigma)$.
+\end{definition}
+
+\begin{theorem}[три эквивалентных определения]\forcenewline
+\begin{enumerate}
+\item Вектор $(\seq{\xi}{1}{n})$ гауссовский
+\item $\xi = A\eta + b$ п.н., где $A \in Mat(n\times m)$, $b \in \myR^n$,
+$\eta = (\seq{\eta}{1}{n}$, $\eta_i$~-- нез. $N(0,1)$
+\item $\forall \tau \in \myR^n <\tau, \xi>$ имеет одномерное нормальное распределение.
+\end{enumerate}
+
+\paragraph*{Свойства гаусс. векторов}
+\begin{enumerate}
+\item Смысл параметров: если $\xi \tilde N(a, \Sigma)$, то $a = E\xi$, $\Sigma = D\xi$~--
+матрица ковариаций.
+\item Если $\xi$ гауссовский, то $A\xi$ гауссовский для всех матриц соответствуещего размера
+(т.е. линейное преобразование гауссовского вектора также является гауссовским вектором).
+\item Если $\xi = (\seq{\xi}1n) \tilde N(a, \Sigma)$, то $\seq{\xi}1n$ нез. в совокупности
+$\Leftrightarrow \Sigma$ диагональна $\Leftrightarrow \seq{\xi}1n$ некоррелированы.
+\end{enumerate}
+\end{theorem}
+}
+
+\begin{definition}
+Действительный случайный процесс $(X_t, t \in T)$ называется \emph{гауссовским}, если
+все его конечномерные распределения гауссовские:
+
+$$\forall n \; \forall \seq{t}1n \in T \text{ вектор } (\seq{X}{t_1}{t_n}) \text{ гауссовский }$$
+\end{definition}
+
+\begin{definition}
+Процесс $(X_t, t \in T)$ называется \emph{$L^2$-процессом}, если $\forall t \in T E|X_t^2| < +\infty$.
+
+Функция $a(t) = EX_t$ называется \emph{функцией среднего} процесса $X_t$.
+
+Функция $R(s,t) = cov(X_s, X_t)$ называется \emph{ковариационной функцией} процесса $X_t$.
+
+Функция $K(s,t) = EX_sX_t$ называется \emph{корреляционной функцией} процесса $X_t$.
+\end{definition}
+
+\begin{remark}
+распределение гауссовского вектора однозначно определяется матожиданием и матрицей ковариаций
+$\Rightarrow$ конечномерные распределения гауссовского процесса определяются функцией среднего
+и ковариационной функцией.
+\end{remark}
+
+\begin{definition}
+Функция $f(x, y), x, y \in t$ называется \emph{неотрицательно определенной} на $T\times T$, если
+
+$$\forall n \; \forall \seq t 1 n \in T \; \forall \seq x 1 n \in \myR
+\sum_{i, j = 1}^{n} f(t_i, t_j) x_i x_j \geq 0$$
+\end{definition}
+
+\begin{lem}
+Ковариационная и корреляционная функции случайного процесса симметричны и неотрицательно
+определены.
+\end{lem}
+\begin{proof}
+Пусть $X_t$~-- $L^2$-процесс, $K(s, t)$~-- его корреляционная функция. Тогда
+$\forall n \; \forall \seq t 1 n \in T \; \forall \seq x 1 n \in \myR$
+
+$$\sum_{i, j = 1}^{n} f(t_i, t_j) x_i x_j \geq 0 = \sum_{i,j=1}^n(EX_{t_i}X_{t_j})x_i x_j =
+E(\sum_{i,j=1}^n x_iX_{t_i} x_j X_{t_j}) = E(\sum_{i=1}^n x_i X_{t_i})^2 \geq 0$$
+
+$\Rightarrow K(s,t)$ неотрицательно определена.
+
+Теперь заметим, что  $R(s,t) = cov(X_s, X_t)$~-- это корреляционная функция для  $Y_t = X_t - EX_t$
+$\Rightarrow$ она тоже неотрицательно определена.
+
+Их симметричность очевидна.
+\end{proof}
+
+\begin{theorem}[о существовании гауссовских процессов]
+Пусть $T$~-- некоторое множество, на нем задана функция $a(t)$, и $R(s, t)$~-- симметричная и 
+неотрицательно определенная функция на $T \times T$. Тогда существует вероятностное пространство
+$(\Omega, \myF, P)$ и гауссовский процесс $(X_t, t \in t)$ т.ч. $a(t) = EX_t$ и
+$R(s,t) =  cov(X_s, X_t)$.
+\end{theorem}
+\begin{proof}
+Для $n \in \myN$, $\seq t 1 n  \in T$  рассмотрим вектор $\seq{a}{t_1}{t_n} =
+(a(t_1), \dots, a(t_n))$, $\Sigma_{\seq t 1 n} = ||R(t_i, t_j)||^n_{i,j=1}$.
+
+Тогда $\Sigma_{\seq t 1 n}$ неотрицательно определена. Рассмотрим х.ф.
+
+$$\phi_{\seq t 1 n}(\seq \lambda 1 n) = e^{i<a_{\seq t 1 n}, \lambda} -
+\frac12<\Sigma{\seq t 1 n}\lambda, \lambda>$$
+
+Легко видеть, что такой набор х.ф. обладает свойствами симметрии и согласованности:
+
+$$<a_{\seq t 1 n}, \lambda> = \sum_{k=1}^n a(t_k)(\lambda_k) = |\forall \sigma| =
+\sum_{k=1}^n a(t_{\sigma(k)})(\lambda_{\sigma(k)})$$
+
+$$<a_{\seq t 1 n}, (\seq \lambda 1 n)> \vline_{\lambda_n = 0} =
+<a_{\seq t 1 {n-1}}, (\seq \lambda 1 {n-1})$$
+
+Для $R$ аналогично (написать!).
+
+По теореме Колмогрова это означает, что $\exists (X_t, t \in T)$ т.ч.
+$\phi_{\seq t 1 n}$~-- х.ф. $(X_{t_1}, \dots, X_{t_n}) \Rightarrow X_t$~-- гауссовский 
+процесс и $EX_t = a(t)$, $cov(X_s, X_t) = R(s,t)$.
+\end{proof}
+
+\subsection{Процесс броуновского движения (винеровский процесс)}
+
+\begin{definition}
+Случайный процесс $(W_t, t \in 0)$ называется \emph{винеровским}, если
+\begin{enumerate}
+\item $W_0 = 0$ п.н.
+\item $W_t$ имеет независимые приращения
+\item $W_t - W_t \tilde N(0, t-s)$, $t \geq s$
+\end{enumerate}
+\end{definition}
+
+\begin{statement}
+Винеровский процесс существует.
+\end{statement}
+\begin{proof}
+По критерию существования процессов с независимыми приращениями достаточно проверить, что
+$\forall s \leq u \leq t$ (опускаем аргумент у х.ф.)
+
+$$\phi_{W_t W_s}  = \phi_{W_t-W_u} \phi_{W_u-W_s}$$
+
+Но т.к. $W_t-W_s \sim N(0, t-s)$
+
+$$\phi_{W_t-W_s}(\tau) = e^{-\frac12 \tau^2(t-s)}$$
+
+Очевидно, свойство выполнено и процесс существует.
+\end{proof}
+
+\begin{theorem}[эквивалентное определение винеровского процесса]
+Процесс $(W_t, t \geq 0)$  является винеровским $\Leftrightarrow$
+\begin{enumerate}
+\item $W_t$ гауссовский
+\item $\forall t \geq 0 \; EW_t = 0$
+\item $cov(W_s, W_t) = min(s, t)$
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+$(\Rightarrow)$ $W_t \sim N(0, t) \Rightarrow EW_t = 0$. Посчитаем ковариационную функцию:
+
+$$cov(W_s, W_t) = |t > s| = cov(W_s, W_t - W_s + W_s) = cov(W_s, W_t-W_s) + cov(W_s, W_s)
+= 0 + DW_s = s = min(s, t)$$.
+
+Пусть $0 \geq t_1 \geq \dots \geq t_n$, $\xi = (\seq{W}{t_1}{t_n})$.
+Вектор $\eta = (W_{t_1}, W_{t_2} - W_{t_1}, \dots, W_n - W_{n-1})$ имеет независимые нормальные
+компоненты $\Rightarrow \eta$~-- гауссовский вектор.  Очевидно, $\xi = A\eta$ (выписать A!), значит,
+$\xi$ также является гауссовским $\Rightarrow W_t$~-- гауссовский процесс.
+
+$(\Leftarrow)$ Почему такой процесс существует? По теореме достаточно проверить, что $min(s, t)$~--
+неотрицательно определенная функция.
+
+Для этого можно заметить, что $min(s,t)$~-- это ковариационная функция для пуассоновского процесса
+интенсивности $1$. Значит, она неотрицательно определена.
+
+$$EW_t = 0, DW_t = min(t, t) = t \Rightarrow DW_0 = 0, EW_0 = 0 \Rightarrow W_0 = 0 \text{ п.н.}$$
+
+Пусть $0 \leq t_1 < \dots < t_n$ фикс. Тогда $(\seq{W}{t_1}{t_n})$~-- гаусс. вектор
+$\Rightarrow \xi = (W_{t_n} - W_{t_{n-1}}, \dots, W_{t_2} - W_{t_1}, W_{t_1})$~-- тоже гауссовский
+как линейное преобразование гауссовского вектора. Значит, для независимости компонент $\xi$
+достаточно проверить, что они некоррелированны.
+
+Пусть $i > j, t_0 = 0$.
+
+$$cov(W_{t_i} - W_{t_{i-1}}, W_{t_j} - W_{t_{j-1}}) =$$
+$$cov(W_{t_i}, W_{t_j}) - cov(W_{t_{i-1}}, W_{t_j}) -
+cov(W_.... =$$
+$$t_j - t_j - t_{j-1} + t_{j-1} = 0$$
+
+$\Rightarrow W_t$ имеет независимые приращения.
+
+$W_t - W_s \sim N(a, \sigma^2)$.
+
+$$a = E(W_t-W_s) = 0$$
+$$\sigma^2 = D(W_t-W_s) = cov(W_t-W_s, W_t-W_s) =
+cov(W_t, W_t) + cov(W_s, W_s) - 2cov(W_t,W_s) = |t > s| = t - 2s + s = t-s$$
+\end{proof}
+
+\subsection{Непрерывность траекторий $W_t$}
+
+\begin{definition}
+Процесс $(Y_t, t \in T)$ называется \emph{модификацией} процесса $(X_t, t \in T)$, если
+$\forall t \in T$
+
+$$P(Y_t = X_t) = 1$$
+\end{definition}
+\begin{theorem}[Колмогорова о существании непрерывной модификации, б/д]
+Пусть процесс $(X_t, t \in [a,b])$ таков, что для некоторых $C, \alpha, \eps > 0$ выполнено:
+
+$$\forall t, s \in [a,b] \; E|X_t-X_s|^\alpha \leq C|t-s|^{1+\eps}$$
+
+Тогда у $X_t$ существует модификация $Y_t$, все траектории которой непрерывны.
+\end{theorem}
+\begin{corollary}
+У $W_t, t \geq 0$ существует непрерывная модификация.
+\end{corollary}
+\begin{proof}
+Т.к. $W_t-W_s \sim N(0, |t-s|) \Rightarrow E(W_t-W_s)^4 = 3(|t-s|)^2 
+\Rightarrow$ у $W_t$ существует непрерывная модификация на любом конечном отрезке.
+
+Пусть $W_t^{(n)}$~-- непрерывная модификация $W_t$ на отрезке $[n, n+1]$, $n \in \myZ_+$.
+Рассмотрим процесс 
+
+$$X_t(\omega) = \{W_t^{(n)}(\omega, t \in [n, n+1)\}$$
+
+Разрывы траекторий $X_t$ возможны только в целых точках времени, когда $W_{n+1}^{(n)}(\omega) \neq
+W_{n+1}^{(n+1)}(\omega)$. Но $W_t^{(n)}$ и $W_t^{(n+1})$~-- модификации $W_t$ $\Rightarrow$
+
+$$P(W_{n+1}^{(n)} = W_{n+1}) = 1 = P(W_{n+1}^{(n+1)} = W_{n+1})$$
+$$\Rightarrow P(\exists n: W_{n+1}^{(n)} \neq W_{n+1}^{(n+1)}) = 0$$
+
+Теперь рассмотрим 
+
+$$\tilde{X_t}(\omega) = 
+X_t(\omega), \text{ если } \forall n \; W_{n+1}^{(n)}(\omega) = W_{n+1}^{(n+1)}(\omega)
+0, \text{ иначе }
+$$
+
+Это и будет искомая непрерывная модификация.
+\end{proof}
+
+\begin{remark}
+Условие $\eps > 0$ в теореме Колмогорова существенно.
+\end{remark}
+\begin{proof}
+Пусть $(N_t, t \geq 0)$~-- пуассоновский процесс. Тогда
+$$E(N_t-N_t) = \lambda|t-s|$$
+
+$\Rightarrow N_t$ удовлетворяет условию теоремы Колмогорова с $\eps = 0$. Но траектории
+$N_t$ разрывны почти наверное на всем $\myR_+$ и разрывны с положительной вероятностью на любом конечном отрезке.
+\end{proof}
+
+\begin{remark}
+Всюду далее, где это необходимо, считаем, что нам задана непрерывная модификация винеровского
+процесса.
+\end{remark}
+
+\begin{theorem}[Пэли, Зигмунд, Винер, б/д]
+С вероятностью $1$ траектория винеровского процесса не дифференцируема ни в одной точке $\myR_+$.
+\end{theorem}
+\begin{theorem}[Закон повторного логарифма]
+$$P \pars{ \limsup_{t \to +\infty} \frac{W_t}{\sqrt{2t \ln \ln t}} = 1 } = 1$$
+
+$$ \left| \limsup_{t \to +\infty} = \lim_{t\to +\infty} \sup_{s \geq t} f(s) \right| $$
+\end{theorem}
+\begin{corollary}
+$$P \pars{ \liminf_{t \to +\infty} \frac{W_t}{\sqrt{2t \ln \ln t}} = -1 } = 1$$
+\end{corollary}
+\begin{proof}
+Рассмотрим $Y_t = -W_t$~-- тоже винеровский процесс.
+\end{proof}
 \end{document}
