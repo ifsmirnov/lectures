@@ -31,7 +31,7 @@ $P(s1 \neq 0, s2 \neq 0, \dots, s_{2n-1} \neq 0, s_{2n} = 0)$~-- ?
 
 Вероятность каждой траектории, приводящей в $0$ в момент времени $2n$, одна и та же и равна $(pq)^n$.
 Каждую траекторию длины $2n$ можно сопоставить с вектором
-$\{\eps_1, \dots, \eps_{2n}\}, \eps_i \in \{-1, 1\}$. 
+$\{\eps_1, \dots, \eps_{2n}\}, \eps_i \in \{-1, 1\}$.
 
 \begin{definition}
 Траектория $(\eps_1, \dots, \eps_{2n})$ длины $2n$ называется
@@ -41,7 +41,7 @@ $\forall k < 2n~\mysum_{j=1}^k \eps_j > 0$ и $\mysum_{j=1}^{2n} \eps_j = 0$.
 \end{definition}
 
 \begin{statement}
-Наблюдение: $P(S_1 \neq 0, \dots, S_{2n-1} \neq 0, S_{2n} = 0) = 2 \cdot \tilde{C_n} \cdot (pq)^n$. 
+Наблюдение: $P(S_1 \neq 0, \dots, S_{2n-1} \neq 0, S_{2n} = 0) = 2 \cdot \tilde{C_n} \cdot (pq)^n$.
 \end{statement}
 
 \begin{definition}
@@ -102,7 +102,7 @@ $$P(\{S_n, n \geq 1\} \text{вернется в ноль}) = 1 - |p-q|$$
 && P(\{S_n, n >= 1\} \text{вернется в 0}) = \\
 && \mysum_{n=1}^{\infty} P(S_1 \neq 0, \dots, S_{2n} = 0) = \\
 && \mysum_{n=1}^{\infty} 2 \tilde{C_N} (pq)^n = \\
-&& \mysum_{n=1}^{\infty} 2 C_{n-1} (pq)^n = \\ 
+&& \mysum_{n=1}^{\infty} 2 C_{n-1} (pq)^n = \\
 && \mysum_{n=0}^{\infty} 2 C_n(pq)^{n-1} = \\
 && 2 pq \cdot f(pq) = \\
 && 2 pq * \frac{1}{2pq}(1 - \sqrt{1-4pq}) = |\text{ т.к. } (p+q)^2 = 1| = \\
@@ -168,7 +168,7 @@ E(|\xi_\alpha| \: \ind{|\xi_\alpha| \geq c}) = 0$$
 Смысл: <<хвосты>> распределения равномерно малы.
 
 \begin{theorem}[б/д]
-Пусть $\{\xi_n, n \in \myN\}$~-- с.в., $\xi_n \overset{d}{\to} \xi$. Тогда 
+Пусть $\{\xi_n, n \in \myN\}$~-- с.в., $\xi_n \overset{d}{\to} \xi$. Тогда
 $$E\xi_n \to E\xi \Leftrightarrow \{\xi_n, n \in \myN\} \text{ равномерно интегрируемо}$$
 \end{theorem}
 \begin{remark}
@@ -218,12 +218,12 @@ $$P \pars {\myliminf{n\to\infty} \frac{S_n}{\sqrt{2n \ln \ln n}} = -1 } = -1$$
 \end{corollary}
 \begin{proof}
 Рассмотрим $X_n = -S_n$~-- симметричное случайное блуждание $\Leftrightarrow$ по ЗПЛ
-получаем, что 
+получаем, что
 $$ \text{п.н. } 1 = \mylimsup{n}\frac{X_n}{\sqrt{2n \ln \ln n}} =
 -\myliminf{n}\frac{S_n}{\sqrt{2n \ln \ln n}}$$
 \end{proof}
 
-Смысл: 
+Смысл:
 --- рис.5 ---
 
 

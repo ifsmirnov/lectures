@@ -20,7 +20,7 @@ $$(X_t, t \geq 0) \text{ т.ч. } X_0 \overset{d}{=} Q_0, X_t - X_s \overset{d}{
 $$\forall \; 0 \leq s < u < t \; \phi_{s,t}(\tau) = \phi_{s,u}(\tau) \phi_{u,t}(\tau)$$
 \end{theorem}
 \begin{proof} \forcenewline
-$(\Rightarrow)$ $\exists X_t \Rightarrow \forall \; s < u < t X_t-X_u$ и 
+$(\Rightarrow)$ $\exists X_t \Rightarrow \forall \; s < u < t X_t-X_u$ и
 $X_u-X_s$ независимы $\Rightarrow \phi_{s,t}(\tau) = \phi_{X_t-X_s}(\tau)=
 \phi_{X_t-X_u+X_u-X_s}(\tau) =
 \phi_{X_t-X_u}(\tau) \phi_{X_u-X_s}(\tau) =
@@ -40,27 +40,27 @@ $A = $ ---матр.1---
 
 $\Rightarrow \phi_\eta(\lambda vector) = Ee^{i <\eta, \lambda v>} = $
 записи на бумажке
- 
-Теперь забудем про то, что процесс существует. 
+
+Теперь забудем про то, что процесс существует.
 $\forall n \forall t_1 < ... t_n$ зададим $\phi_t1..tn$ по формуле $(*)$.
-% 
+%
 % Проверим условия следствия: пусть $l_m = 0$.
 % ---опять записи на бумажке---
-% 
+%
 % Смотрим на две подчеркнутые штуки.
-% 
+%
 % По условию $\phi_tm-1 tm(\tau) \phi_tm tm+1(\tau) = \phi_tm-1 tm+1(\tau)$.
-% 
+%
 % --- тут то, что после равно в кружочке --
-% 
-% 
+%
+%
 % Согласно следствию, $\exists (X_t, t \geq 0)$ т.ч.
 % $\phi_tn .. t1$~-- х.ф. $(X_tn .. X_t1)$. По построению $\phi_t1..tn$
 % это означает, что $X_t$ имеет независимые приращения, $X_t - X_s \overset{d}{=}
 % Q_{s,t}, t > s$, и $X_0 \overset{d}{=} Q_0$.
 \end{proof}
 
-% 
+%
 % \begin{remark}
 % \begin{itemize}
 % \item Процесс с независимыми приращениями с дискретным временем~-- это случайное блуждание.ы
@@ -68,7 +68,7 @@ $\forall n \forall t_1 < ... t_n$ зададим $\phi_t1..tn$ по формул
 % что $\xi$ и $\eta$ независимы.
 % \end{itemize}
 % \end{remark}
-% 
+%
 % \subsection{Пуассоновский процесс}
 % \begin{definition}
 % Процесс $N_t, t \geq 0$ называется \emph{пуассоновским процессом интенсовности $\lambda > 0$},
@@ -79,19 +79,19 @@ $\forall n \forall t_1 < ... t_n$ зададим $\phi_t1..tn$ по формул
 % \item $N_t - N_s \tilde Pois(\lambda(t-s)), t > s \geq 0$
 % \end{enumerate}
 % \end{definition}
-% 
+%
 % \begin{statement}
 % Пуассоновский процесс существует.
 % \end{statement}
 % \begin{proof}
 % Пусть $\phi_s,t$~-- х.ф. $Pois(\lambda(t-s))$. Тогда
 % $$\phi_{s,t}(\tau) = ... = e^{\lambda(t-s)(e^{i\tau} - 1)}$$
-% 
+%
 % Отсюда видно, что $\forall s < u < t$
 % $$\phi_{s,u}(\tau) \phi_{u,t}(\tau) = \phi_{s,t}(\tau)$$
 % Значит, по критерию существования пуассоновский процесс существует.
 % \end{proof}
-% 
+%
 % \paragraph{Свойства траекторий}
 % \begin{enumerate}
 % \item Целочисленные: $N_t \in \myZ_+, t \geq 0$
@@ -102,7 +102,7 @@ $\forall n \forall t_1 < ... t_n$ зададим $\phi_t1..tn$ по формул
 % \item размер скачков?
 % \item распределение моментов скачков
 % \end{enumerate}
-% 
+%
 % \begin{theorem}[явная конструкция пуассоновского процесса]
 % Пусть $\{\xi_n, n \in \myN\}$~-- нез. $\tilde Exp(\lambda)$, $S_n =  \xi_1 + \dots + \xi_n$.
 % Тогда процесс восстановления
@@ -115,27 +115,27 @@ $\forall n \forall t_1 < ... t_n$ зададим $\phi_t1..tn$ по формул
 % $$P_{S_n..S_1}(x_1..x_1) = P_{\xi_n .. \xi_1}(X_n-x_{n-1}, ..., X_2-X_1, X_1) =
 % |\xi_i \tilde Exp(\lambda)| = \prod_{k=1}^{n} \lambda e^{-(x_k-x_k-1)\lambda} \ind{X_k > X_k-1} =
 % \lambda^n e^{-\lambda X_n} \ind{x_n > \dots > x_1 > 0}$$
-% 
+%
 % Зафиксируем $0 < t_1 < ... < t_n$ и $k_n \geq ... \geq k_1, k_i \in \myZ_+$. Рассмотрим
 % $$P(X_tn - X_tn-1 = k_n-k_n-1, ..., X_t1 = k1)$$
-% 
+%
 % Что такое X_tn - X_tn-1? Это количество скачков, которые совершает процесс на отрезке $tn-1, tn$.
-% 
+%
 % $$ = P(S_k1 < t1, \{S_k1+1, ... S_k2\} \in (t1, t2], ..., \{S_{k_{n-1}+1}, .., S_kn\}
 % \in (t_n-1, tn], S_{k_n+1} > t_n) =$$
 % |подставляем плотность $p_{s1..s_{k_n + 1}} =$|
 % интегрируем в области, написанной на бумажке.
-% 
+%
 % дальше много всего на бумажке
-% 
+%
 % Следовательно, $X_t$ имеет независимые приращения, и эти приращения пуассоновские:
-% 
+%
 % $$X_{t_j} - X_{t_{j-1}} \tilde Pois(\lambda(t_j - t_{j-1}))$$
-% 
+%
 % Значит, $X_t$~-- это пуассоновский процесс.
 % \end{proof}
 % \begin{corollary}
-% Пусть $N_t$~-- пуассоновский процесс интенсивности $\lambda > 0$, $Y_n$~-- 
+% Пусть $N_t$~-- пуассоновский процесс интенсивности $\lambda > 0$, $Y_n$~--
 % момент $n$-того скачка. Тогда
 % \begin{enumerate}
 % \item П.н. все скачки $N_t$ имеют размер $1$
@@ -145,10 +145,10 @@ $\forall n \forall t_1 < ... t_n$ зададим $\phi_t1..tn$ по формул
 % \begin{proof}
 % \begin{enumerate}
 % \item Пусть $X_t$~-- явная конструкция из теоремы.
-% 
+%
 % $P($У $N_t$ есть скачок размера $\geq 2) = P($ у $X_t$ есть скачок размера $\geq 2) =
 % P(\exists n: S_n = S_{n+1}) = P(\exists n; \xi_n = 0) = 0$, т.к. $\xi_n$ абсолютно непрерывны.
-% 
+%
 % \item 2 и 3 выполнены для $X_t$ по построению $\Rightarrow$ верны и для $N_t$.
 % \end{enumerate}
 % \end{proof}
