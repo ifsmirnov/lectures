@@ -29,34 +29,34 @@
 \DeclareMathSymbol{\leqslant}{\mathrel}{AMSa}{"36}
 \DeclareMathSymbol{\geqslant}{\mathrel}{AMSa}{"3E}
 
-\def\contentsname{Оглавление}
-\def\figurename{Рис.}
-\def\partname{Часть}
-\def\listfigurename{Список рисунков}
-\def\listtablename{Список таблиц}
-\def\refname{Литература}
-\def\bibname{Литература}
-\def\indexname{Предметный указатель}
-\def\tablename{Таблица}
-\def\abstractname{Аннотация}
-\@ifundefined{chapter}{}{\def\chaptername{Глава}}
-\def\proofname{Доказательство}
-\def\appendixname{Приложение}
-\def\prefacename{Предисловие}
+\def\contentsname{п·пЁп╩п╟п╡п╩п╣п╫п╦п╣}
+\def\figurename{п═п╦я│.}
+\def\partname{п╖п╟я│я┌я▄}
+\def\listfigurename{п║п©п╦я│п╬п╨ я─п╦я│я┐п╫п╨п╬п╡}
+\def\listtablename{п║п©п╦я│п╬п╨ я┌п╟п╠п╩п╦я├}
+\def\refname{п⌡п╦я┌п╣я─п╟я┌я┐я─п╟}
+\def\bibname{п⌡п╦я┌п╣я─п╟я┌я┐я─п╟}
+\def\indexname{п÷я─п╣п╢п╪п╣я┌п╫я▀п╧ я┐п╨п╟п╥п╟я┌п╣п╩я▄}
+\def\tablename{п╒п╟п╠п╩п╦я├п╟}
+\def\abstractname{п░п╫п╫п╬я┌п╟я├п╦я▐}
+\@ifundefined{chapter}{}{\def\chaptername{п⌠п╩п╟п╡п╟}}
+\def\proofname{п■п╬п╨п╟п╥п╟я┌п╣п╩я▄я│я┌п╡п╬}
+\def\appendixname{п÷я─п╦п╩п╬п╤п╣п╫п╦п╣}
+\def\prefacename{п÷я─п╣п╢п╦я│п╩п╬п╡п╦п╣}
 
 %%
 \def\ralph#1{\@ralph{\@nameuse {c@#1}}}
-\def\@ralph#1{\ifcase #1\or а\or б\or в\or г\or д\or е\or ж\or з\or
-и\or к\or л\or м\or н\or о\or п\or р\or с\or т\or у\or ф\or х\or
-ц\or ч\or ш\or щ\or э\or ю\or я\else\@ctrerr  \fi
+\def\@ralph#1{\ifcase #1\or п╟\or п╠\or п╡\or пЁ\or п╢\or п╣\or п╤\or п╥\or
+п╦\or п╨\or п╩\or п╪\or п╫\or п╬\or п©\or я─\or я│\or я┌\or я┐\or я└\or я┘\or
+я├\or я┤\or я┬\or я┴\or я█\or я▌\or я▐\else\@ctrerr  \fi
 }
 \def\Ralph#1{\@Ralph{\@nameuse {c@#1}}}
-\def\@Ralph#1{\ifcase #1\or А\or Б\or В\or Г\or Д\or Е\or Ж\or З\or
-И\or К\or Л\or М\or Н\or О\or П\or Р\or С\or Т\or У\or Ф\or Х\or
-Ц\or Ч\or Ш\or Щ\or Э\or Ю\or Я\else\@ctrerr  \fi
+\def\@Ralph#1{\ifcase #1\or п░\or п▒\or п▓\or п⌠\or п■\or п∙\or п√\or п≈\or
+п≤\or п \or п⌡\or п°\or п²\or п·\or п÷\or п═\or п║\or п╒\or пё\or п╓\or п╔\or
+п╕\or п╖\or п╗\or п╘\or п╜\or п╝\or п╞\else\@ctrerr  \fi
 }
 
-% Теперь "русифицируем" окружение enumerate:
+% п╒п╣п©п╣я─я▄ "я─я┐я│п╦я└п╦я├п╦я─я┐п╣п╪" п╬п╨я─я┐п╤п╣п╫п╦п╣ enumerate:
 
 \def\labelenumi{\theenumi)}
 \def\theenumii{\ralph{enumii}}
@@ -66,9 +66,9 @@
 \let\theenumiii\relax
 \def\p@enumiii{\theenumi\theenumii}
 %
-% И еще запретим вкладывать четыре enumerate друг в друга ...
+% п≤ п╣я┴п╣ п╥п╟п©я─п╣я┌п╦п╪ п╡п╨п╩п╟п╢я▀п╡п╟я┌я▄ я┤п╣я┌я▀я─п╣ enumerate п╢я─я┐пЁ п╡ п╢я─я┐пЁп╟ ...
 %
-\def\enumerate{\ifnum \@enumdepth >2% было 3, а не 2
+\def\enumerate{\ifnum \@enumdepth >2% п╠я▀п╩п╬ 3, п╟ п╫п╣ 2
 \@toodeep\else
       \advance\@enumdepth \@ne
       \edef\@enumctr{enum\romannumeral\the\@enumdepth}\list
@@ -354,25 +354,25 @@
 \def\@grq{\kern-.07em`\kern.07em}
 \def\grq{\protect\@grq}
 
-% \сегодня is the Russian counterpart of \today;
+% \я│п╣пЁп╬п╢п╫я▐ is the Russian counterpart of \today;
 % we prefer to keep the original \today intact
-\def\сегодня{\number\day\space
+\def\я│п╣пЁп╬п╢п╫я▐{\number\day\space
                 \ifcase\month\or
-                 января\or февраля\or марта\or апреля\or мая\or
-                 июня\or июля\or августа\or сентября\or октября\or
-                 ноября\or декабря\fi\space\number\year}
+                 я▐п╫п╡п╟я─я▐\or я└п╣п╡я─п╟п╩я▐\or п╪п╟я─я┌п╟\or п╟п©я─п╣п╩я▐\or п╪п╟я▐\or
+                 п╦я▌п╫я▐\or п╦я▌п╩я▐\or п╟п╡пЁя┐я│я┌п╟\or я│п╣п╫я┌я▐п╠я─я▐\or п╬п╨я┌я▐п╠я─я▐\or
+                 п╫п╬я▐п╠я─я▐\or п╢п╣п╨п╟п╠я─я▐\fi\space\number\year}
 
 
 \frenchspacing
 \righthyphenmin 2
 
 \if@textyo
-   \def\@textyе{е}
-   \def\@textyЕ{Е}
+   \def\@textyп╣{п╣}
+   \def\@textyп∙{п∙}
    \DeclareRobustCommand{\"}[1]{%
     {\edef\@tempa{#1}%
-     \ifx\@tempa\@textyе \char 163\relax
-       \else \ifx\@tempa\@textyЕ \char 179\relax
+     \ifx\@tempa\@textyп╣ \char 163\relax
+       \else \ifx\@tempa\@textyп∙ \char 179\relax
          \else {\accent "7F #1}\fi\fi
     }%
    }
