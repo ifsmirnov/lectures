@@ -1,9 +1,3 @@
-\input{header}
-
-\ifdefined\Main\else
-\begin{document}
-\fi
-
 \section{Фильтрации и марковские моменты}
 В этой главе считаем, что $T \subset R$.
 
@@ -69,7 +63,7 @@ $$\{\tau_B \leq n\} = \bigcup_{k = 1}^{n}\{X_k \in B\} \in \myF_n^x$$
 $t$ включительно.
 
 \begin{theorem}[марковское свойство $W_t$, усиленный вариант]
-Пусть $(W_t, t \geq 0)$~-- винеровский процесс. Тогда 
+Пусть $(W_t, t \geq 0)$~-- винеровский процесс. Тогда
 $\forall a > 0$ процесс $X_t \ W_{t+a} - W_a$ является винеровским и
 не зависит от $\myF_a^W = \sigma(W_s, s \leq a)$.
 \end{theorem}
@@ -162,7 +156,7 @@ $\forall x,y \geq 0$
 $$P(W_t < y - x, M_t \geq y) = P(W_t > y + x)$$
 \end{theorem}
 \begin{proof}
-Если $y = 0$, то утверждение тривиально. Если же $y > 0$, то рассмотрим $\tau_y$. 
+Если $y = 0$, то утверждение тривиально. Если же $y > 0$, то рассмотрим $\tau_y$.
 Это момент остановки, значит, к нему применим принцип отражения.
 
 $Z_t = \{W_t, t \leq \tau_y; 2W_\tau - W_t, t \geq \tau_y\}$ является винеровским.
@@ -170,7 +164,7 @@ $Z_t = \{W_t, t \leq \tau_y; 2W_\tau - W_t, t \geq \tau_y\}$ является в
 Обозначим через $\sigma_y$ первый момент достижения $y$ у $Z_t$. Тогда
 $(W_t, \tau_y) \overset{d}{=} (Z_t, \sigma_y) \Rightarrow
 P(W_t < y-x, M_t \geq y) = P(W_t < y-x, \tau_y \leq t) =
-P(Z_t < y-x, \sigma_y \leq t) = |\sigma_y = \tau_y| = 
+P(Z_t < y-x, \sigma_y \leq t) = |\sigma_y = \tau_y| =
 P(Z_t < y-x,  \tau_y \leq t) = |\text{ по опр. }Z_t| =
 P(W_\tau - W_t \leq y-x, \tau_y \leq t) =
 P(2y - W_t \leq y-x, \tau_y \leq t) =
@@ -185,8 +179,3 @@ $P(M_t \geq y) = P(M_t \geq y, W_t < y) + P(M_t \geq y, W_t \geq y) =
 P(W_t > y) + P(M_t \geq y, W_t \geq y) =
 P(W_t > y) + P(W_t \geq y) = 2P(W_t \geq y) = P(|W_t \geq y|)$.
 \end{proof}
-
-
-\ifdefined\Main\else
-\end{document}
-\fi
