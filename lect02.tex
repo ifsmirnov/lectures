@@ -64,14 +64,14 @@ $\{X_t=+\infty\} = \{\sup\{n:S_n\leq t\} = +\infty\} =
 |по непрерывности вероятностной меры|
 $\Rightarrow P(X_t = +\infty) = P(\forall n S_n \leq t) =
 \mylim_{n \to \infty} P(S_n \leq t)
-= \mylim_{n \to \infty} P(S_n \leq t_n) \leq$ % что такое t_n?
+= \mylim_{n \to \infty} P(\frac{S_n}{n} \leq \frac{t}{n}) \leq$
 |для больших n|
 $\leq \mylim_{n \to \infty} P(\frac{S_n}{n} < \frac{a}{2})$.
 
 Но по УЗБЧ $S_n \to a \Rightarrow P(S_n \leq a/2) \to P(a \leq a/2) = 0$.
 
 В силу того, что $X_t\uparrow$ при $t\uparrow$,
-$P(\exists t: X_t = +\infty) = P(\exists b: x_n = +\infty) = 0$. % что это за b и что тут должно быть?
+$P(\exists t: X_t = +\infty) = P(\exists n: x_n = +\infty) \leq \mysum_{n}{P(x_n = \infty)} = 0$. 
 
 Если $E\xi_i = +\infty$, то случай сводится к предыдущему:
 $\exists C > 0: \tilde{\xi_n} = \min(\xi_n, C), E\tilde{\xi_n} > 0$.
