@@ -1,0 +1,201 @@
+\input{header}
+
+\ifdefined\Main\else
+\begin{document}
+\fi
+
+\section{Ветвящиеся процессы Гальтона-Ватсона}
+Физическая модель: --- рис.6 ---
+В каждый следующий момент времени каждая частица распадается на некоторое случайное число
+таких же частиц.
+
+Мат. модель:
+Пусть $\xi$~-- случайная величина со значениями в $\myZ_+$.
+$\{\xi_k^{(n)}, k, n \in \myN\}$~-- независимые случайные величины с тем
+же распределением, что и $\xi$. Положим
+
+$$X_0 = 1, X_1 = \xi_1^{(1)}, X_n = \mysum_{k=1}^{X_{n-1}} \xi_k^{(n)}$$
+
+\begin{definition}
+$\{X_n, n \in \myZ_+\}$~-- \emph{ветвящийся процесс Гальтона-Ватсона}, построенный по с.в. $\xi$.
+\end{definition}
+
+\begin{itemize}
+\item $X_n$~-- число частиц в $n$-м поколении
+\item $\xi_k^{(n)}$~-- число потомков $k$-й частицы в $n-1$-м поколении
+\end{itemize}
+
+\underline{Вопрос}: какова вероятность вырождения процесса?
+
+\subsection{Производящие функции}
+\begin{definition}
+Пусть $\xi$~-- случайная величина. Тогда ее \emph{производящей функцией} называется
+$$\phi_\xi(z) = Ez^\xi, z \in \myR$$
+\end{definition}
+
+\paragraph{Свойства производящих функций}
+
+\begin{enumerate}
+\item $\phi_\xi(1) = 1$
+\item $\phi'_\xi(1) = E\xi$
+\item Если $\xi$ и $\eta$ независимы, то $\phi_{\xi + \eta}(z) = \phi_\xi(z) \phi_\eta(z)$
+\end{enumerate}
+
+Если $\xi$ принимает значения в $\myZ_+$, то введем $p_k = P(\xi = k), k \in \myZ_+$.
+
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item $\phi_\xi(z) = \mysum_{k=0}^{\infty}z^k p_k$
+\item $\phi_\xi(0) = p_0$
+\item $p_k = \frac{f_\xi^{(k)}(z)}{k!}$
+\item Ряд для $\phi_\xi(z)$ сходится абсолютно и равномерно в области $\{|z| \leq 1\}$
+\item $\phi_\xi(z)$ непрерывно дифференцируема бесконечное число раз в области $\{|z| < 1\}$
+\end{enumerate}
+
+Пусть далее $\{X_n, n \in \myZ_+\}$~-- ветвящийся процесс Г.-В., построенный по $\xi$.
+
+\begin{lem} \label{lem:phi_xi_n}
+$$\phi_{X_{n_1}}(z) = \phi_{X_n}(\phi_\xi(z))$$
+\end{lem}
+\begin{proof}
+$\phi_{X_{n+1}}(z) = Ez^{X_{n+1}}$
+
+$$
+ E \pars {z^{X_{n+1}} | X_n = m} =
+ E \pars {z^{\mysum_{k=1}^{X_n} \xi_k^{(n+1)}} \vline X_n = m} =
+ E \pars {z^{\mysum_{k=1}^m \xi_k^{(n+1}} \vline X_n = m} =
+ E z^{\mysum_{k=1}^m \xi_k^{(n+1)}} =
+ (\phi_\xi(z))^m
+$$
+
+Значит,
+$$\phi_{X_{n+1}} = Ez^{X_{n+1}} = E(E(z^{X_{n+1}}|X_n)) =
+E(\phi_\xi(z))^m \vline_{m = X_n} = \phi_{X_n}(\phi_\xi(z))$$
+\end{proof}
+
+\begin{corollary} \forcenewline
+\begin{enumerate}
+\item $\phi_{X_n}(z) =
+	\underset{n \text{ раз}}{\underbrace{\phi_\xi(\phi_\xi(\dots\phi_\xi(}} z)\dots))$
+\item $\phi_{X_{n+1}}(z) = \phi_\xi(\phi_{X_n}(z))$
+\begin{proof}
+Применяем индуктивно лемму \ref{lem:phi_xi_n}:
+$$\phi_{X_{n+1}} = 
+	\underset{n+1 \text{ раз}}{\underbrace{\phi_\xi(\phi_\xi(\dots\phi_\xi(}} z)\dots)) =
+	\phi_\xi(\phi_{X_n}(z))$$
+\end{proof}
+\end{enumerate}
+\end{corollary}
+
+\subsection{Вероятность вырождения процесса} \forcenewline
+Положим $q_n = P(X_n = 0)$, $q = P(\text{процесс выродился}) = P(\exists n: X_n = 0)$
+\begin{lem}
+$$q_n \leq q_{n+1} \text{  и  } q = \mylim_n q_n$$
+\end{lem}
+\begin{proof}
+$\{X_n = 0\} \subset \{X_{n+1} = 0\} \Rightarrow q_n \leq q_{n+1}$
+
+Но $P(\exists n: X_n = 0) = P\pars{\mybigcup_n \{X_n = 0\}} =$
+|по непрерывности вероятностной меры| $ = \mylim_n P(X_n = 0) = \mylim_n q_n$.
+\end{proof}
+
+\begin{lem}
+Вероятность вырождения $q$ является решением уравнения
+$$s = \phi_\xi(s)$$
+\end{lem}
+\begin{proof}
+$$
+q \leftarrow q_n = P(X_n = 0) = \phi_{X_n}(0) = \phi_\xi(\phi_{X_{n-1}}(0)) = \phi_\xi(q_{n-1})
+\to \phi_\xi(q)
+$$
+\end{proof}
+
+Вопрос: что делать, если на $[0,1]$ решений несколько?
+
+Всегда есть решение $s = 1$.
+
+\begin{theorem}[о вероятности вырождения]
+
+Пусть $\xi \neq 1$ п.н. Пусть $\mu = E\xi$ (м.б. $\mu = +\infty$). Тогда
+\begin{enumerate}
+\item Если $\mu \leq 1$, то уравнение
+$$s = \phi_\xi(s)$$
+имеет только одно решение $s = 1$ на $[0, 1]$. Тогда $q = 1$.
+\item Если $\mu > 1$, то уравнение
+$$s = \phi_\xi(s)$$
+имеет единственное решение $s_0 \in [0, 1)$. В этом случае $q = s_0$.
+\end{enumerate}
+\end{theorem}
+\begin{proof} \forcenewline
+\begin{enumerate}
+\item Рассмотрим производную $\phi'_\xi(s) = \mysum_{k=1}^{\infty}k s^{k-1}P(\xi = k)$
+для $s \in [0, 1]$. Заметим, что эта функция строго возрастает (поскольку каждое слагаемое
+строго возрастает) и положительна (поскольку есть хоть одна ненулевая вероятность).
+Действительно, если $\phi_\xi(s) = 0$ для $s > 0 \Rightarrow P(\xi = k) = 0 \; \forall k \geq 1$.
+Но тогда $P(\xi = 0) = 1$ и $q = 1$.
+
+Далее считаем производную положительной.
+
+Для $s \in (0, 1)$:
+$$
+1 - \phi_\xi(s) = \phi'_\xi(\theta)(1-s)
+$$
+где $\theta = \theta(s) \in (s, 1)$
+Но $\phi'_\xi(\theta) < \phi'_\xi(1) = \mu = 1$, т.к. производная строго возрастает.
+$$\Rightarrow 1 - \phi_\xi(s) < 1-s \text{ при } s \in [0, 1) \Rightarrow s < \phi_\xi(s)$$
+Решений, отличных от $1$, нет.
+
+График в этом случае выглядит так:
+--- рис.7 ---
+
+\item Рассмотрим 
+$$\phi''_\xi(s) = \mysum_{k=2}^{\infty} k(k-1)s^{k-2}P(\xi = k) \text{ для } s \in [0, 1)$$
+Функция строго возрастает и положительна на $(0, 1)$.
+
+Действительно, если вдруг
+$\phi''_\xi(s) = 0 \Rightarrow \forall k \geq 2 \; P(\xi=k) = 0 \Rightarrow
+\xi < 1 \text{ п.н. } \Rightarrow E\xi = \mu \leq 1$, что противоречит условию.
+
+Теперь считаем, что $\phi'_\xi(s)$ строго возрастает на $[0, 1)$. 
+$$\Rightarrow 1 - \phi'_\xi(s) \text{ меняет знак на } [0, 1) \text { не более одного раза }$$
+
+$$1 - \phi'_\xi(0) = 1 - P(\xi = 1) >  0$$
+$$1 - \phi'_\xi(1) = 1 - \mu < 0$$
+$$\Rightarrow 1 - \phi'_\xi(s) \text{ меняет знак ровно один раз}$$
+
+График выглядит так:
+--- рис.8 ---
+
+Пусть $\phi'_\xi(s_1) = 1$. Что можно сказать про $s - \phi_\xi(s)$?
+При $s < s_1$ возрастает, при $s > s_1$ возрастает.
+
+Если $\phi_\xi(0) = P(\xi = 0) = 0$, то $s - \phi_\xi(s) \vline_{s=0} = 0$ --- рис.9 ---,
+то есть ровно один корень $s = 0 \in [0, 1)$. Ясно, что в этом случае $\boxed{q = 0}$.
+
+Если $\phi_\xi(0) > 0$, то $s - \phi_\xi(s) \vline_{s = 0} < 0$
+$\Rightarrow \exists s_0$~-- единственное решение уравнения на $[0, 1)$
+
+Заметим, что при $s < s_0 \; s < \phi_\xi(s)$, а при $s > s_0 \; s > \phi_\xi(s)$.
+
+Но $q_n = \phi_\xi(q_{n-1}) \leq$ |т.к. $q_n \geq q_{n-1}$| $ \leq \phi_\xi(q_n)
+\Rightarrow q_n \notin(s_0, 1)$.
+
+Если $q_n = 1$, то $q_{n-1} = 1$, т.к. $\phi_\xi(s) = 1 \Leftrightarrow s = 1$.
+По индукции получаем, что $q_0 = 1$. Но $q_0 = 0$, т.к. в нулевой момент времени
+всегда есть одна частица.
+Значит, $q \in [0, s_0]$ как предел $q_n \Rightarrow q = s_0$.
+
+График: --- рис 11 --- 
+\end{enumerate}
+\end{proof}
+
+\underline{Вывод:} вероятность вырождения~-- это наименьший корень уравнения $s = \phi_\xi(s)$
+из отрезка $[0, 1]$.
+
+\underline{Интерпретация:} если среднее число потомков меньше $1$, то процесс обречен на вымирание.
+Иначе есть ненулевая вероятность того, что мы будем живы до бесконечности.
+
+
+\ifdefined\Main\else
+\end{document}
+\fi

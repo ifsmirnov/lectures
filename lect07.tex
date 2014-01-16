@@ -1,0 +1,322 @@
+\input{header}
+
+\ifdefined\Main\else
+\begin{document}
+\fi
+
+\section{Гауссовские случайные процессы}
+
+\rightoffset{
+\begin{definition}
+Случайный вектор $\xi =  \seq{\xi}{1}{n}$ называется гауссовским, если его х.ф. имеет вид
+
+$$\phi_\xi(t) = e^{i \langle a,t\rangle - \frac{1}{2} \langle \Sigma t, t\rangle }$$
+
+где $a \in \myR^n$, а $\Sigma \in Mat(n\times n)$~-- симметрическая и неотрицательно определенная.
+В этом случае пишут $\xi \sim N(a, \Sigma)$.
+\end{definition}
+
+\begin{theorem}[три эквивалентных определения]\forcenewline
+\begin{enumerate}
+\item Вектор $(\seq{\xi}{1}{n})$ гауссовский
+\item $\xi = A\eta + b$ п.н., где $A \in Mat(n\times m)$, $b \in \myR^n$,
+$\eta = (\seq{\eta}{1}{n})$, $\eta_i$~-- нез. $N(0,1)$
+\item $\forall \tau \in \myR^n \langle \tau, \xi \rangle $ имеет одномерное нормальное распределение.
+\end{enumerate}
+
+\paragraph*{Свойства гаусс. векторов}
+\begin{enumerate}
+\item Смысл параметров: если $\xi \sim N(a, \Sigma)$, то $a = E\xi$, $\Sigma = D\xi$~--
+матрица ковариаций.
+\item Если $\xi$ гауссовский, то $A\xi$ гауссовский для всех матриц соответствуещего размера
+(т.е. линейное преобразование гауссовского вектора также является гауссовским вектором).
+\item Если $\xi = (\seq{\xi}1n) \sim N(a, \Sigma)$, то $\seq{\xi}1n$ нез. в совокупности
+$\Leftrightarrow \Sigma$ диагональна $\Leftrightarrow \seq{\xi}1n$ некоррелированы.
+\end{enumerate}
+\end{theorem}
+}
+
+\begin{definition}
+Действительный случайный процесс $(X_t, t \in T)$ называется \emph{гауссовским}, если
+все его конечномерные распределения гауссовские:
+
+$$\forall n \; \forall \seq{t}1n \in T \text{ вектор } (\seq{X}{t_1}{t_n}) \text{ гауссовский }$$
+\end{definition}
+
+\begin{definition}
+Процесс $(X_t, t \in T)$ называется \emph{$L^2$-процессом}, если $\forall t \in T E|X_t^2| < +\infty$.
+
+Функция $a(t) = EX_t$ называется \emph{функцией среднего} процесса $X_t$.
+
+Функция $R(s,t) = cov(X_s, X_t)$ называется \emph{ковариационной функцией} процесса $X_t$.
+
+Функция $K(s,t) = EX_sX_t$ называется \emph{корреляционной функцией} процесса $X_t$.
+\end{definition}
+
+\begin{remark}
+распределение гауссовского вектора однозначно определяется матожиданием и матрицей ковариаций
+$\Rightarrow$ конечномерные распределения гауссовского процесса определяются функцией среднего
+и ковариационной функцией.
+\end{remark}
+
+\begin{definition}
+Функция $f(x, y), x, y \in t$ называется \emph{неотрицательно определенной} на $T\times T$, если
+
+$$\forall n \; \forall \seq t 1 n \in T \; \forall \seq x 1 n \in \myR
+\sum_{i, j = 1}^{n} f(t_i, t_j) x_i x_j \geq 0$$
+\end{definition}
+
+\begin{lem}
+Ковариационная и корреляционная функции случайного процесса симметричны и неотрицательно
+определены.
+\end{lem}
+\begin{proof}
+Пусть $X_t$~-- $L^2$-процесс, $K(s, t)$~-- его корреляционная функция. Тогда
+$\forall n \; \forall \seq t 1 n \in T \; \forall \seq x 1 n \in \myR$
+
+$$\sum_{i, j = 1}^{n} f(t_i, t_j) x_i x_j \geq 0 = \sum_{i,j=1}^n(EX_{t_i}X_{t_j})x_i x_j =
+E \pars{\sum_{i,j=1}^n (x_iX_{t_i}) (x_j X_{t_j})} =
+E\pars{\sum_{i=1}^n x_i X_{t_i}}^2 \geq 0$$
+
+$\Rightarrow K(s,t)$ неотрицательно определена.
+
+Теперь заметим, что  $R(s,t) = cov(X_s, X_t)$~-- это корреляционная функция для  $Y_t = X_t - EX_t$
+$\Rightarrow$ она тоже неотрицательно определена.
+
+Их симметричность очевидна.
+\end{proof}
+
+\begin{theorem}[о существовании гауссовских процессов]
+Пусть $T$~-- некоторое множество, на нем задана функция $a(t)$, и $R(s, t)$~-- симметричная и 
+неотрицательно определенная функция на $T \times T$. Тогда существует вероятностное пространство
+$(\Omega, \myF, P)$ и гауссовский процесс $(X_t, t \in t)$ т.ч. $a(t) = EX_t$ и
+$R(s,t) =  cov(X_s, X_t)$.
+\end{theorem}
+\begin{proof}
+Для $n \in \myN$, $\seq t 1 n  \in T$  рассмотрим вектор $a_{\seq t 1 n} =
+(a(t_1), \dots, a(t_n))$, $\Sigma_{\seq t 1 n} = \Vert R(t_i, t_j) \Vert^n_{i,j=1}$.
+
+Тогда $\Sigma_{\seq t 1 n}$ неотрицательно определена. Рассмотрим х.ф.
+
+$$\phi_{\seq t 1 n}(\seq \lambda 1 n) = e^{i \langle a_{\seq t 1 n}, \lambda\rangle -
+\frac12\langle\Sigma{\seq t 1 n}\lambda, \lambda\rangle}$$
+
+Легко видеть, что такой набор х.ф. обладает свойствами симметрии и согласованности:
+
+$$\langle a_{\seq t 1 n}, \lambda \rangle
+= \sum_{k=1}^n a(t_k)(\lambda_k) = |\forall \sigma| =
+\sum_{k=1}^n a(t_{\sigma(k)})(\lambda_{\sigma(k)})$$
+
+$$\langle a_{\seq t 1 n}, (\seq \lambda 1 n)\rangle \vline_{\lambda_n = 0} =
+\langle a_{\seq t 1 {n-1}}, (\seq \lambda 1 {n-1}) \rangle$$
+
+Можно проверить, что для ковариационной функции также выполняются подобные равенства.
+
+По теореме Колмогрова это означает, что $\exists (X_t, t \in T)$ т.ч.
+$\phi_{\seq t 1 n}$~-- х.ф. $(X_{t_1}, \dots, X_{t_n}) \Rightarrow X_t$~-- гауссовский 
+процесс и $EX_t = a(t)$, $cov(X_s, X_t) = R(s,t)$.
+\end{proof}
+
+\subsection{Процесс броуновского движения (винеровский процесс)}
+
+\begin{definition}
+Случайный процесс $(W_t, t \in 0)$ называется \emph{винеровским}, если
+\begin{enumerate}
+\item $W_0 = 0$ п.н.
+\item $W_t$ имеет независимые приращения
+\item $W_t - W_t \sim N(0, t-s)$, $t \geq s$
+\end{enumerate}
+\end{definition}
+
+\begin{statement}
+Винеровский процесс существует.
+\end{statement}
+\begin{proof}
+По критерию существования процессов с независимыми приращениями достаточно проверить, что
+$\forall s \leq u \leq t$ (опускаем аргумент у х.ф.)
+
+$$\phi_{W_t W_s}  = \phi_{W_t-W_u} \phi_{W_u-W_s}$$
+
+Но т.к. $W_t-W_s \sim N(0, t-s)$
+
+$$\phi_{W_t-W_s}(\tau) = e^{-\frac12 \tau^2(t-s)}$$
+
+Очевидно, свойство выполнено и процесс существует.
+\end{proof}
+
+\begin{theorem}[эквивалентное определение винеровского процесса]
+Процесс $(W_t, t \geq 0)$  является винеровским $\Leftrightarrow$
+\begin{enumerate}
+\item $W_t$ гауссовский
+\item $\forall t \geq 0 \; EW_t = 0$
+\item $cov(W_s, W_t) = min(s, t)$
+\end{enumerate}
+\end{theorem}
+\begin{proof} \forcenewline
+$(\Rightarrow)$ $W_t \sim N(0, t) \Rightarrow EW_t = 0$. Посчитаем ковариационную функцию:
+
+\longformula{
+cov(W_s, W_t) = |t > s| = cov(W_s, W_t - W_s + W_s) = \\
+cov(W_s, W_t-W_s) + cov(W_s, W_s) = 0 + DW_s = s = min(s, t)
+}
+
+Пусть $0 \geq t_1 \geq \dots \geq t_n$, $\xi = (\seq{W}{t_1}{t_n})$.
+Вектор $\eta = (W_{t_1}, W_{t_2} - W_{t_1}, \dots, W_n - W_{n-1})$ имеет независимые нормальные
+компоненты $\Rightarrow \eta$~-- гауссовский вектор.  Очевидно, $\xi = A\eta$ (выписать A!), значит,
+$\xi$ также является гауссовским $\Rightarrow W_t$~-- гауссовский процесс.
+
+$(\Leftarrow)$ Почему такой процесс существует? По теореме достаточно проверить, что $min(s, t)$~--
+неотрицательно определенная функция.
+Для этого можно заметить, что $min(s,t)$~-- это ковариационная функция для пуассоновского процесса
+интенсивности $1$. Значит, она неотрицательно определена.
+
+$$EW_t = 0, DW_t = min(t, t) = t \Rightarrow DW_0 = 0, EW_0 = 0 \Rightarrow W_0 = 0 \text{ п.н.}$$
+
+Пусть $0 \leq t_1 < \dots < t_n$ фиксированы. Тогда $(\seq{W}{t_1}{t_n})$~-- гаусс. вектор
+$\Rightarrow \xi = (W_{t_n} - W_{t_{n-1}}, \dots, W_{t_2} - W_{t_1}, W_{t_1})$~-- тоже гауссовский
+как линейное преобразование гауссовского вектора. Значит, для независимости компонент $\xi$
+достаточно проверить, что они некоррелированны.
+
+Пусть $i > j, t_0 = 0$.
+
+\longformula{
+cov(W_{t_i} - W_{t_{i-1}}, W_{t_j} - W_{t_{j-1}}) = \\
+cov(W_{t_i}, W_{t_j}) - cov(W_{t_{i-1}}, W_{t_j}) -
+cov(W_.... = \\
+t_j - t_j - t_{j-1} + t_{j-1} = 0
+}
+
+$\Rightarrow W_t$ имеет независимые приращения.
+
+$W_t - W_s \sim N(a, \sigma^2)$.
+
+$$a = E(W_t-W_s) = 0$$
+\longformula{
+\sigma^2 = D(W_t-W_s) = cov(W_t-W_s, W_t-W_s) = \\
+cov(W_t, W_t) + cov(W_s, W_s) - 2cov(W_t,W_s) =|t > s| = \\
+t - 2s + s = t-s
+}
+\end{proof}
+
+\subsection{Непрерывность траекторий винеровского процесса}
+
+\begin{definition}
+Процесс $(Y_t, t \in T)$ называется \emph{модификацией} процесса $(X_t, t \in T)$, если
+$\forall t \in T$
+
+$$P(Y_t = X_t) = 1$$
+\end{definition}
+\begin{theorem}[Колмогорова о существании непрерывной модификации, б/д]
+Пусть процесс $(X_t, t \in [a,b])$ таков, что для некоторых $C, \alpha, \eps > 0$ выполнено:
+
+$$\forall t, s \in [a,b] \; E|X_t-X_s|^\alpha \leq C|t-s|^{1+\eps}$$
+
+Тогда у $X_t$ существует модификация $Y_t$, все траектории которой непрерывны.
+\end{theorem}
+\begin{corollary}
+У $W_t, t \geq 0$ существует непрерывная модификация.
+\end{corollary}
+\begin{proof}
+$$W_t-W_s \sim N(0, |t-s|) \Rightarrow E(W_t-W_s)^4 = 3(|t-s|)^2$$
+Значит, у $W_t$ существует непрерывная модификация на любом конечном отрезке.
+
+Пусть $W_t^{(n)}$~-- непрерывная модификация $W_t$ на отрезке $[n, n+1]$, $n \in \myZ_+$.
+Рассмотрим процесс 
+
+$$X_t(\omega) = \{W_t^{(n)}(\omega), t \in [n, n+1)\}$$
+
+Разрывы траекторий $X_t$ возможны только в целых точках времени, когда $W_{n+1}^{(n)}(\omega) \neq
+W_{n+1}^{(n+1)}(\omega)$. Но $W_t^{(n)}$ и $W_t^{(n+1)}$~-- модификации $W_t$, значит,
+
+\longformula{
+P(W_{n+1}^{(n)} = W^{}_{n+1}) = 1 = P(W_{n+1}^{(n+1)} = W^{}_{n+1})
+\Rightarrow P(\exists n: W_{n+1}^{(n)} \neq W_{n+1}^{(n+1)}) = 0
+}
+
+Теперь рассмотрим 
+
+$$\tilde X_t(\omega) = \left\lbrace
+\begin{array}{l}
+X_t(\omega), \text{ если } \forall n \; W_{n+1}^{(n)}(\omega) = W_{n+1}^{(n+1)}(\omega) \\
+0, \text{ иначе }
+\end{array}
+\right.
+$$
+
+Это и будет искомая непрерывная модификация.
+\end{proof}
+
+\begin{remark}
+Условие $\eps > 0$ в теореме Колмогорова существенно.
+\end{remark}
+\begin{proof}
+Пусть $(N_t, t \geq 0)$~-- пуассоновский процесс. Тогда
+$$E(N_t-N_t) = \lambda|t-s|$$
+
+Значит, $N_t$ удовлетворяет условию теоремы Колмогорова с $\eps = 0$. Но траектории
+$N_t$ разрывны почти наверное на всем $\myR_+$ и разрывны с положительной вероятностью на любом конечном отрезке.
+\end{proof}
+
+\begin{remark}
+Всюду далее, где это необходимо, считаем, что нам задана непрерывная модификация винеровского
+процесса.
+\end{remark}
+
+\begin{theorem}[Пэли, Зигмунд, Винер, б/д]
+С вероятностью $1$ траектория винеровского процесса не дифференцируема ни в одной точке $\myR_+$.
+\end{theorem}
+\begin{theorem}[Закон повторного логарифма]
+$$P \pars{ \limsup_{t \to +\infty} \frac{W_t}{\sqrt{2t \ln \ln t}} = 1 } = 1$$
+
+$$ \left| \limsup_{t \to +\infty} = \lim_{t\to +\infty} \sup_{s \geq t} f(s) \right| $$
+\end{theorem}
+\begin{corollary}
+$$P \pars{ \liminf_{t \to +\infty} \frac{W_t}{\sqrt{2t \ln \ln t}} = -1 } = 1$$
+\end{corollary}
+\begin{proof}
+Рассмотрим $Y_t = -W_t$~-- тоже винеровский процесс.
+\end{proof}
+
+ЗПЛ означает, что с вероятностью $1$, начиная с некоторого момента $t_0 = t_0(\eps, \omega)$
+траектория $W_t$ находится внутри области, ограниченной кривыми $\pm (1+\eps)\sqrt{2t\ln\ln t}$.
+В то же время $\forall Е > 0$ траектория бесконечно много раз в обе стороны выходит из области,
+ограниченной кривыми $\pm (1-\eps)\sqrt{2t\ln\ln t}$, после момента времени $T$.
+
+\begin{corollary}[локальный ЗПЛ]
+$$\limsup{t \to +0} f(t) = \lim_{t \to +0} \sup_{s \leq t} f(s)$$
+$$P \pars{\limsup_{t \to +0} \frac{W_t}{\sqrt 2t \ln \ln \frac{1}{t}} = 1} = 1$$
+$$P \pars{\liminf_{t \to +0} \frac{W_t}{\sqrt 2t \ln \ln \frac{1}{t}} = -1} = 1$$
+\end{corollary}
+\begin{proof}
+Рассмотрим процесс $B_t = t*W_{\frac{1}{t}} \ind{t>0}$. Покажем, что $B_t$~-- винеровский.
+
+\begin{enumerate}
+\item $\forall \seq t 1 n \geq 0$ имеем $(\seq{B}{t_1}{t_n})$~-- линейное преобразование вектора
+$(\seq{W}{\frac{1}{t_1}}{\frac{1}{t_n}})$, значит, это гауссовский вектор. Тогда $B_t$~--
+гауссовский процесс.
+
+\item $EB_t = 0 \forall t \geq 0$.
+
+\item $cov(B_t, B_s) = t s cov(W_\frac{1}{t}, W_\frac{1}{s}) = \frac{ts}{max(t,s)} = min(t, s)$.
+\end{enumerate}
+
+Значит, по теореме об эквивалентном определении $B_t$~-- винеровский процесс. Тогда
+\longformula{
+\limsup_{t \to +0} \frac{W_t}{\sqrt{2t \ln \ln \frac{1}{t}}} = |s = \frac{1}{t}| =\\
+\limsup_{s \to +\infty}\frac{W_\frac{1}{s}}{\sqrt{2 \frac{1}{s} \ln \ln s}} =\\
+\limsup_{s \to +\infty}\frac{s W_{\frac{1}{s}}}{\sqrt{2s \ln \ln s}} =\\
+\limsup_{s \to +\infty}\frac{B_s}{\sqrt{2s \ln \ln s}} = 1 \text{ п.н. по ЗПЛ. }
+}
+\end{proof}
+
+\begin{theorem}[марковское свойство $W_t$]
+Пусть $(W_t, t \geq 0)$~-- винеровский процесс. Тогда $\forall a > 0$ процесс
+$X_t = W_{t+a} - W_a$ тоже винеровский.
+
+\underline{Вопрос:} можно ли заметить $a$ на случайное время?
+\end{theorem}
+
+
+\ifdefined\Main\else
+\end{document}
+\fi

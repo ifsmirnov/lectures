@@ -1,0 +1,239 @@
+\input{header}
+
+\ifdefined\Main\else
+\begin{document}
+\fi
+
+\section{Случайное блуждание на прямой}
+
+\begin{definition}
+Пусть ${\xi_n, n\in \myN}$~-- норсв, $P(\xi_n = 1) = p$, $P(\xi_n = -1) = q = 1-p$. Тогда процесс
+$(S_n, n \in \myZ_+), S_0 = 0, S_n = \xi_1 + \dots + \xi_n$ называется \emph{простейшим случайным блужанием на прямой}.
+Если $p = q = \frac{1}{2}$, то блуждание называется \emph{симметричным}.
+\end{definition}
+
+\subsection{Вопросы}
+\begin{enumerate}
+\item вероятность возвращения в ноль
+\item распределение первого момента возвращения в ноль
+\item среднее время в нуле
+\item геометрия траектории
+\end{enumerate}
+\begin{remark}
+Последние два вопроса~-- только для симметричного случая.
+\end{remark}
+
+\subsection{Возвращение в ноль}
+
+$P(\{S_n, n \in \myN\}~\text{вернется в ноль})$~-- ?
+
+$P(s1 \neq 0, s2 \neq 0, \dots, s_{2n-1} \neq 0, s_{2n} = 0)$~-- ?
+
+Вероятность каждой траектории, приводящей в $0$ в момент времени $2n$, одна и та же и равна $(pq)^n$.
+Каждую траекторию длины $2n$ можно сопоставить с вектором
+$\{\eps_1, \dots, \eps_{2n}\}, \eps_i \in \{-1, 1\}$. 
+
+\begin{definition}
+Траектория $(\eps_1, \dots, \eps_{2n})$ длины $2n$ называется
+\emph{положительной}, если
+$\forall k < 2n~\mysum_{j=1}^k \eps_j > 0$ и $\mysum_{j=1}^{2n} \eps_j = 0$.
+Число таких траекторий обозначим через $\tilde{C_n}$.
+\end{definition}
+
+\begin{statement}
+Наблюдение: $P(S_1 \neq 0, \dots, S_{2n-1} \neq 0, S_{2n} = 0) = 2 \cdot \tilde{C_n} \cdot (pq)^n$. 
+\end{statement}
+
+\begin{definition}
+Траектория $(\eps_1, \dots, \eps_{2n})$ длины $2n$ называется
+\emph{неотрицательной}, если
+$\forall k < 2n~\mysum_{j=1}^k \eps_j \geq 0$ и $\mysum_{j=1}^{2n} \eps_j = 0$.
+Число таких траекторий обозначим через $C_n$.
+\end{definition}
+
+\begin{statement}
+$\tilde{C_n} = C_{n-1}$.
+\end{statement}
+\begin{proof}
+Смотри рисунок 3.
+
+Чтобы получить из положительной траектории неотрицательную, покажем,
+что в начале стоит $1$, в конце~-- $-1$. Чтобы получить из неотрицательной положительную,
+добавим в начало $1$, а в конец $-1$. Получили биекцию между положительными траекториями длины $2n$
+и неотрицательными длины $2n-2$.
+\end{proof}
+
+\begin{statement}
+Пусть $C_0 = 1$. Тогда $C_n = \mysum_{k=0}^{n-1} C_k \cdot C_{n-1-k}$.
+\end{statement}
+\begin{proof}
+Смотри рисунок 4.
+
+Пусть $2k$~-- первый момент возвращения траектории в ноль.
+Ясно, что таких траекторий $\tilde{C_k} \cdot C_{n-k}$. Суммируя по $k=1\dots n$:
+
+$$C_n = \sum_{k=1}^n \tilde{C_k} \cdot C_{n-k} = \sum_{k=0}^{n-1} C_k \cdot C_{n-k-1}$$
+\end{proof}
+
+Вывод: $C_n$~-- это числа Каталана. $C_n =\frac{1}{n+1} \cdot \comb{2n}{n}$.
+
+Производящая функция: $f(t) = \mysum_{n=0}^{\infty} C_n t^n = \frac{1}{2t}(1-\sqrt{1-4t}), |t| \leq \frac14$.
+
+\begin{theorem}[распределение момента возвращения в ноль]
+$$P(S_1 \neq 0, \dots, S_{2n-1} \neq 0, S_{2n} = 0) = \frac{1}{2n-1}\comb{2n}{n}(pq)^n$$
+\end{theorem}
+\begin{proof}
+\begin{eqnarray*}
+&&P(S_1 \neq 0, \dots, S_{2n-1} \neq 0 , s_{2n} = 0) = \\
+&&2\tilde{C_n} (pq)^n = \text{| утв.1 |} = \\
+&&2 C_{n-1} (pq)^n = \\
+&&\frac2n C_{2n-2}{n-1} (pq)^n = \\
+&&\frac{2n}{n\cdot n} C_{2n-2}^{n-1}(pq)^n = \\
+&&\frac{1}{2n-1}C_{2n}^{n}(pq)^n.
+\end{eqnarray*}
+\end{proof}
+
+\begin{theorem}[вероятность возвращения в ноль]
+
+$$P(\{S_n, n \geq 1\} \text{вернется в ноль}) = 1 - |p-q|$$
+\end{theorem}
+\begin{proof}
+\begin{eqnarray*}
+&& P(\{S_n, n >= 1\} \text{вернется в 0}) = \\
+&& \mysum_{n=1}^{\infty} P(S_1 \neq 0, \dots, S_{2n} = 0) = \\
+&& \mysum_{n=1}^{\infty} 2 \tilde{C_N} (pq)^n = \\
+&& \mysum_{n=1}^{\infty} 2 C_{n-1} (pq)^n = \\ 
+&& \mysum_{n=0}^{\infty} 2 C_n(pq)^{n-1} = \\
+&& 2 pq \cdot f(pq) = \\
+&& 2 pq * \frac{1}{2pq}(1 - \sqrt{1-4pq}) = |\text{ т.к. } (p+q)^2 = 1| = \\
+&& 1 - \sqrt{(p-q)^2} = 1 - |p-q|
+\end{eqnarray*}
+\end{proof}
+
+\begin{corollary}
+Симметричное случайное блуждание на прямой возвратно с вероятностью 1.
+\end{corollary}
+
+\subsection{Среднее время нахождения в нуле}
+Пусть $(S_n, n \in \myN)$~-- простейшее симметричное случайное блуждание на прямой.
+Обозначим через $L_n(0)$ число нулей в последовательности $S_k, k = 0 \dots n$.
+\underline{Вопрос}: $EL_n(0) \sim ?$
+
+\begin{lem}
+$$EL_n(0) = E|S_{n+1}|$$
+\end{lem}
+\begin{proof}
+Рассмотрим $|S_{n+1}|$.
+$$
+|S_{n+1}| = |S_n + \xi_{n+1}| = \left\lbrace
+\begin{array}{l r}
+	S_n + \xi_{n+1}, & S_n > 0 \\
+	1, & S_n = 0 \\
+	-(S_n + \xi_{n+1}), & S_n < 0
+\end{array}
+\right.
+$$
+
+$|S_{n+1}| = (S_n + \xi_{n+1})\ind{S_n > 0} + \ind{S_n = 0}
+- (S_n + \xi_{n+1}) \ind{S_n < 0} =
+\ind{S_n = 0} + (S_n + \xi_{n+1}) \sign(S_n)$
+
+Отсюда $|S_{n+1}| = \ind{S_n = 0} + |S_n| + \xi_{n+1} \sign(S_n) = $ |индукция|
+$ = \mysum_{k=0}^n (\ind{S_k = 0} + \xi_{k+1} \sign(S_k)) = L_n(0) +
+\mysum_{k=0}^n \xi_{k+1}\sign(S_k)$.
+
+Берем матожидание у обеих частей равенства:
+$E|S_{n+1}| = EL_n(0) + \mysum_{k=0}^nE(\xi_{k+1}\sign(S_k)) =
+EL_n(0) + \mysum_{k=0}^n E\xi_{k+1} E\sign(S_k) = EL_n(0)$.
+\end{proof}
+
+Согласно ЦПТ,
+$\frac{S_n}{\sqrt{n}} \overset{d}{\to} \eta \sim \mathcal{N}(0, 1)$.
+
+По теореме о наследовании сходимости
+$\frac{|S_n|}{\sqrt{n}} \overset{d}{\to} |\eta| \sim |\mathcal{N}(0, 1)|$.
+
+\underline{Вопрос}: верно ли данное?
+
+$$E \frac{|S_n|}{\sqrt{n}} \to E|\eta| =
+\int_\myR \frac{1}{\sqrt{\frac{2}{\pi}}} |x| e^{-\frac{x^2}{2}} dx = \sqrt{\frac{2}{\pi}}$$
+
+\begin{definition}
+Множество случайных величин $\{\xi_\alpha, \alpha \in \mathfrak{A}\}$ называется
+\emph{равномерно интегрируемым}, если
+$$\mylim_{c \to +\infty}\sup_{\alpha \in \mathfrak{A}}
+E(|\xi_\alpha| \: \ind{|\xi_\alpha| \geq c}) = 0$$
+\end{definition}
+
+Смысл: <<хвосты>> распределения равномерно малы.
+
+\begin{theorem}[б/д]
+Пусть $\{\xi_n, n \in \myN\}$~-- с.в., $\xi_n \overset{d}{\to} \xi$. Тогда 
+$$E\xi_n \to E\xi \Leftrightarrow \{\xi_n, n \in \myN\} \text{ равномерно интегрируемо}$$
+\end{theorem}
+\begin{remark}
+Если сходимость $\overset{p}{\to}$ или $\overset{\text{п.н.}}{\to}$, то равномерная интергрируемость $\Leftrightarrow \xi_n \overset{L_1}{\to} \xi$.
+\end{remark}
+
+\begin{theorem}[достаточное условие равномерной интегрируемости]
+Пусть $\{\xi_n, n \in \myN\}$~-- с.в., $G(t) \geq 0: \frac{G(t)}{t} \to +\infty
+\text{ при } t \to +\infty$.
+Если $\mysup_n EG(|\xi_n|) < +\infty$, то последовательность равномерно интегрируема.
+\end{theorem}
+\begin{proof}
+Положим $M = \mysup_n EG(|\xi_n|)$. $\forall \eps > 0$ положим $a = \frac{M}{\eps}$.
+Возьмем $c > 0: \frac{G(t)}{t} > a \; \forall t > c$. Тогда
+$\forall t > c, \forall n \in \myN$
+
+$$E(|\xi_n|\ind{|\xi_n| \geq t}) \leq E\pars{\frac{G(|\xi_n|)}{a} \ind{|\xi_n| >= t}} \leq
+E\frac{G(|\xi_n|)}{a} \leq \frac{M}{a} = \eps$$
+$\Leftrightarrow \{\xi_n, n \in \myN\}$ равномерно интегрируема.
+\end{proof}
+
+\begin{theorem}[среднее время в нуле]
+$$EL_n(0) \sim \sqrt{\frac{2n}{\pi}}$$
+\end{theorem}
+\begin{proof}
+Согласно лемме, $EL_n(0) = E|S_{n+1}|$. Покажем, что
+$\{\xi_n = \frac{S_n}{\sqrt{n}}\}$ равномерно интегрируема. Подберем соответствующую функцию $G$.
+Попробуем $G(t) = t^2$.
+
+$$EG(|\xi_n|) = E\xi_n^2 = \frac{(E\xi_n^2)}{n} = \frac{DS_n}{n}
+= \frac{\mysum_{k=1}^n D\xi_k}{n} = \frac{n}{n} = 1$$
+
+Согласно достаточному условию, получили, что последовательность $\frac{|S_n|}{\sqrt{n}}$ равномерно
+интегрируема. Тогда по теореме
+$$\frac{E|S_n|}{\sqrt{n}} \to E\eta = \sqrt{\frac{2}{\pi}} (\eta \sim \mathcal{N}(0, 1))$$
+
+Отсюда
+$$EL_n(0) = E|S_{n+1}| \sim \sqrt{\frac{2(n+1)}{\pi}} \sim \sqrt{\frac{2n}{\pi}}$$
+\end{proof}
+
+\subsection{Свойства траекторий}
+\begin{theorem}[закон повторного логарифма, б/д]
+$$P \pars {\mylimsup{n\to\infty} \frac{S_n}{\sqrt{2n \ln \ln n}} = 1 } = 1$$
+\end{theorem}
+\begin{corollary}
+$$P \pars {\myliminf{n\to\infty} \frac{S_n}{\sqrt{2n \ln \ln n}} = -1 } = -1$$
+\end{corollary}
+\begin{proof}
+Рассмотрим $X_n = -S_n$~-- симметричное случайное блуждание $\Leftrightarrow$ по ЗПЛ
+получаем, что 
+$$ \text{п.н. } 1 = \mylimsup{n}\frac{X_n}{\sqrt{2n \ln \ln n}} =
+-\myliminf{n}\frac{S_n}{\sqrt{2n \ln \ln n}}$$
+\end{proof}
+
+Смысл: 
+--- рис.5 ---
+
+
+ЗПЛ означает, что с вероятностью $1$ траектория случайного блуждания начиная с некоторого
+момента лежит внутри между кривыми $\pm(1+\eps)\sqrt{2n \ln \ln n}$ и в то же время
+бесконечно много раз выходит в обе стороны из области, ограниченной кривыми
+$\pm(1-\eps)\sqrt{2n \ln \ln n}$.
+
+
+
+\ifdefined\Main\else
+\end{document}
+\fi

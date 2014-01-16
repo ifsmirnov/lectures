@@ -1,0 +1,250 @@
+\input{header}
+
+\ifdefined\Main\else
+\begin{document}
+\fi
+
+\section{Конечномерные распределения случайных процесов}
+Пусть $(X_t, t \in T)$~-- случайный процесс на $(\Omega, F, P)$, и $X_t$  принимает
+значения в $(S_t, \myB_t)$.
+
+\begin{definition}
+Множество $S = \myprod_{t\in T} S_t $ называется \emph{пространством траекторий случайного процесса}.
+\end{definition}
+%% поставить нормальный крестик
+
+$$S = \{y = (y(t), t \in t): \forall t \in T \; y(t) \in S_t\}$$
+
+\begin{definition}
+Для $\forall t \in T$ и $B_t \in \myB_t$ введем \emph{элементарный цилиндр}
+с основанием $B_t$:
+$$C(t, B_t) = \{y \in S: y(t) \in B_t\}$$
+\underline{Смысл:} это все траектории, проходящие через $B_t$  в момент времени $t$.
+--- рис.12 --- \forcenewline
+\end{definition}
+
+\begin{definition}
+Минимальная $\sigma$-алгебра $\myB_T$, содержащая все эти элементарные цилиндры,
+называется \emph{цилиндрической $\sigma$-алгеброй} на $S$.
+
+$$\myB_T = \sigma\{C(t, B_t): t \in T, B_t \in \myB_T\}$$
+\end{definition}
+
+$(S, \myB_T)$~-- измеримое пространство.
+
+\begin{lem}
+$X = (X_t, t \in T)$ является случайным процессом $\Leftrightarrow X: \Omega \to S$
+является измеримым относительно цилиндрической $\sigma$-алгебры $\myB_T$.
+\end{lem}
+
+\rightoffset{
+\underline{Напоминание}
+Критерий измеримости отображения
+
+$X: \Omega \to E, ~ \mathcal{M} \subset \mathcal{E}
+\text{ т.ч. }\sigma(\mathcal{M}) = \mathcal{E}$.
+Тогда $X$~-- с.в. $\Leftrightarrow \forall B \in \mathcal{M} \; X^{-1}(B) \in \mathcal{F}$
+}
+
+\begin{proof}
+
+$(\Rightarrow)$ Для $\forall t X_t$~-- случайный элемент со значениями в $(S_t, \myB_t)$. Рассмотрим 
+$\myM$~-- система элементарных цилиндров в $\myB_T$. По определению $\sigma(\myM) = \myB_T$.
+
+$\forall C(t, B_t) \in \myM$ получаем 
+
+$$X^{-1}(C(t, B_t)) = \{\omega:  X(\omega) \in C(t, B_t)\}
+= \{\omega: X_t(\omega) \in B_t \} = \{X_t^{-1}(B_t) \in \myF\}$$
+т.к. $X_t$~-- случайный элемент.
+
+$(\Leftarrow)$ По критерию измеримости отображения
+$$\forall B \in \myB_T \; X^{-1}(B) \in \myF$$
+\end{proof}
+
+\begin{remark}
+Лемма устанавливает эквивалентное определение случайного процесса как единого случайного
+элемента со значениями в пространстве траекторий.
+\end{remark}
+
+\begin{definition}
+\emph{Распределением} $P_X$ случайного процесса $X =  (X_t, t \in T)$
+называется вероятностная мера на $(S, \myB_T)$
+т.ч. $\forall \myB \in \myB_T \; P_X(B) =  P(X \in B)$.
+\end{definition}
+
+Это определение удобно только в том случае, когда <<время>> конечно.
+Для счетного (или тем более континуального) <<времени>> это определение
+очень трудно для понимания.
+
+\begin{definition}
+Пусть $X = (X_t, t \in T)$~--  случайный процесс, $\forall n \in \myN \;
+\forall t_1, \dots, t_n \in T$
+пусть $P_{t_1, \dots, t_n}$ обозначает распределение вектора $(X_{t_1}, \dots, X_{t_n})$.
+Тогда набор вероятностных мер $\{P_{t_1, \dots, t_n}: n \in \myN, t_i \in T\}$
+называется \emph{набором конечномерных распределений} случайного процесса $X$, а сами
+$P_{t_1, \dots, t_n}$ называются конечномерными распределениями $X$.
+\end{definition}
+
+\rightoffset{
+\underline{Напоминание:}
+$P_{..}$~-- вер.мера на
+$(S_{t_1} \times \dots \times S_{t_n},
+\myB_{t_1} \otimes \dots \otimes \myB_{t_n})$, 
+определенная по правилу ---2---.
+}
+
+\begin{lem}
+Пусть $X$ и $Y$~-- случайные процессы c одинаковым временем, имеющие одно и то же пространство
+траекторий. Тогда $P_X = P_Y \Leftrightarrow$ совпадают их конечномерные распределения.
+\end{lem}
+
+\rightoffset{
+\underline{Напоминание:} \forcenewline
+Единственность продолжения меры
+
+Пусть $(E, \myE)$~-- измеримое пространство, $P, Q$~-- две вероятностные меры на нем.
+Пусть $\myM \subset \myE$~-- $\pi$-система и $\sigma(\myM) =  \myE$. Тогда 
+$$P\vline_\myM = Q\vline_\myM \Leftrightarrow P\vline_\myE = Q\vline_\myE$$
+}
+
+\begin{proof}
+Рассмотрим цилиндры (не элементарные!) в $S$:
+$$ \forall b \; \forall t_1 \dots t_n \in T \;\forall \seq{B}{t_1}{t_n}, B_{t_i} \in \myB_{t_i}
+\text{ определим }C(t_1, \dots ,t_n, B_{t_1}, \dots, B_{t_n}) = \{y \in S: y(t_i) \in B_{t_i} \forall i = 1..n\}$$
+Это пересечения каких-то элементарных цилиндров. Фактически, мы фиксируем значение
+случайного процесса в нескольких моментах времени, а не только в одном, как это делалось
+в случае элементарного цилиндра.
+
+Пусть $\myM$~-- множество цилиндров.
+Заметим, что $\myM$~--  $\pi$-система, причем $\sigma(\myM) = \myB_T$.
+
+$(\Rightarrow)$ Пусть $t_1, \dots, t_n \in T, B_{t_1}, \dots, B_{t_n}, B_{t_i} \in \myB_{t_i}$.
+Тогда
+$$
+\begin{array}{rllll}
+P^X_{t_1, \dots, t_n}(B_{t_1} \times \dots \times B_{t_n}) &=&
+P( (X_{t_1}, \dots, X_{t_n}) \in B_{t_1} \times \dots \times B_{t_n}) = \\
+&&P(X \in C(t_1, \dots, t_n, B_{t_1}, \dots, B_{t_n})) = \\
+&&P_X(C(t_1, \dots, t_n, B_{t_1}, \dots, B_{t_n})) = \\
+&&P_Y(C(t_1, \dots, t_n, B_{t_1}, \dots, B_{t_n})) = \\
+&&P( (Y_{t_1}, \dots, Y_{t_n}) \in B_{t_1} \times \dots \times B_{t_n}) =
+P^Y_{t_1, \dots, t_n}(B_{t_1} \times \dots \times B_{t_n})
+\end{array}
+$$
+Доказали, что распределения $X$ и $Y$ совпадают на прямоугольниках.
+Но $B_{t_1} \times \dots \times B_{t_n}$~-- порождающая $\pi$-система
+для $\myB_{t_1} \otimes \dots \otimes \myB_{t_n} \Rightarrow$
+по единственности продолжения меры $P^x_{t_1 \dots t_n} = P^y_{t_1 \dots t_n}$.
+
+$(\Leftarrow)$
+$$
+\begin{array}{l}
+P_X(C(t_1, \dots, t_n, B_{t_1}, \dots, B_{t_n})) = \\
+P^X_{t_1 \dots t_n}(B_{t_1} \times \dots \times B_{t_n}) = \\ % ???
+P^Y_{t_1 \dots t_n}(B_{t_1} \times \dots \times B_{t_n}) = \\ % ???
+P_Y(C(t_1, \dots, t_n, B_{t_1}, \dots, B_{t_n}))
+\end{array}
+$$
+
+Доказали, что $P_x$ и $P_Y$ совпадают на $\myM$. Но $\myM$~-- порождающая
+$\pi$-система для $\myB_T \Rightarrow$ по единствености продолжения меры
+$P_X = P_Y$.
+\end{proof}
+
+Пусть $P_{t_1 \dots t_n}, n \in \myN, t_1 \dots t_n \in T$~-- конечномерное распределение $(X_t, t \in T)$.
+
+\begin{lem}
+Для $\{P_{t_1 \dots t_n}\}$ выполнены условия симметрии $(1)$ и согласованности $(2)$:
+\begin{enumerate}
+\item $\forall n \; \forall t_1 \dots t_n \in T \; \forall \sigma$~-- перестановки $\{1 .. n\}$ выполнено
+$$P_{t_1 \dots t_n}(B_{t_1} \times \dots \times B_{t_n}) =
+P_{t_{\sigma_1} \dots t_{\sigma_n}} (B_{t_{\sigma_1}} \times \dots \times B_{t_{\sigma_n}})
+$$
+
+\item $\forall n \; \forall t_1 \dots t_n \in T$
+$$P_{t_1 \dots t_n}(B_{t_1} \times \dots \times B_{t_{n-1}} \times S_{t_n}) =
+P_{t_1 \dots t_{n-1}}(B_{t_1} \times \dots \times B_{t_{n-1}})$$
+\end{enumerate}
+
+\begin{proof} \forcenewline
+\begin{enumerate}
+\item $P_{t_1 \dots t_n}(B_{t_1} \times \dots \times B_{t_n})
+= P(X_{t_1} \in B_{t_1}, \dots, X_{t_n} \in B_{t_n})$~-- не зависит от перестановки.
+\item $\{X_{t_n} \in S_{t_n}\} =  \Omega$, поэтому это событие ничего не добавляет в пересечение.
+\end{enumerate}
+
+Пусть теперь $X$~--  вещественный процесс, т.е. $(S_t, \myB_t) = (\myR, \myB(\myR)) \; \forall t \in T$.
+\begin{theorem}[Колмогорова о существовании случайного процесса, б/д]
+Пусть $T$~-- некоторое множество, $\forall n \in \myN \; \forall t_1 \dots t_n \in T$ задана
+вероятностная мера
+$P_{t_1 \dots t_n}$ на $(\myR^n, \myB{\myR^n})$,
+причем для системы $\{P_{t_1, \dots t_n}\}$  выполнены условия симметрии и согласованности.
+Тогда $\exists$ вероятностное пространство $(\Omega, \myF, P)$
+и вещественный случайный процесс $(X_t, t \in T)$
+т.ч. $\{P_{t_1 \dots t_n}\}$~-- это его конечномерные распределения.
+\end{theorem}
+\end{proof}
+\end{lem}
+
+% 26 sep 2013
+\begin{theorem}[условия симметрии и согласованности для характеристических функций]
+Пусть $T$~-- некоторое множество, $\forall t_1, \dots, t_n \in T$ задана вер. мера
+$P_{t_1, \dots, t_n}$ на $(\myR^n, \myB(\myR^n)$ с х.ф. $\phi_{t_1, \dots, t_n}$.
+Тогда $\{P_{t_1, \dots, t_n}, n \in \myN, t_i \in T\}$ обладают условиями симм. и согл. $\Leftrightarrow$
+выполнены условия симметрии и согласованности для х.ф.:
+\begin{enumerate}
+\item $\phi_{t_1, \dots, t_n}(\lambda_1, \dots, \lambda_n) =
+\phi_{t_{\sigma_1}, \dots, t_{\sigma_n}}(\lambda_{\sigma_1}, \dots, \lambda_{\sigma_n})
+$
+\item $\phi_{t_1, \dots, t_n}(\lambda_1, \dots, \lambda_{n-1}, 0) =
+\phi_{t_1, \dots, t_{n-1}}(\lambda_1, \dots, \lambda_n)$
+\end{enumerate}
+\end{theorem}
+
+\begin{corollary}
+Пусть $T \subset \myR$, $\forall n \in \myN \; \forall t_1 < \dots < t_n \in T$
+задана х.ф. $\phi_{t_1, \dots, t_n}$ в $\myR^n$. Тогда
+
+$$\exists (\Omega, \myF, P) \text{ и случайный процесс } (X_t, t \in T) \text{ т.ч. }
+\phi_{t_1, \dots, t_n} \text{ -- х.ф. } (X_{t_1}, \dots, X_{t_n})$$
+$$\Leftrightarrow$$
+$$\forall m \; \phi_{t_1, \dots, t_n}(\lambda_1, \dots, \lambda_n) \vline_{\lambda_m = 0} = %\big
+\phi_{t_1, \dots, t_{m-1}, t_{m+1}, \dots, t_n}(\lambda_1, \dots, \lambda_{m-1}, \lambda_{m+1}, \dots, \lambda_n)$$
+\end{corollary}
+
+\begin{proof} \forcenewline
+$(\Rightarrow)$ Очевидно из теоремы Колмогорова и теоремы об условиях симметрии и согласованности
+для хар. функций
+
+$(\Leftarrow)$ Пусть $s_1, \dots, s_n \in T, s_i \neq s_j$, рассмотрим $t_1 < \dots < t_n$ т.ч.
+$t_i = s_{\sigma_i}$ для некоторой перестановки $\sigma$.
+
+Зададим
+$$\phi_{s_1, \dots, s_n}(\lambda_1, \dots, \lambda_n) :=
+\phi_{t_1, \dots, t_n}(\lambda_{\sigma_1}, \dots, \lambda_{\sigma_n})$$
+
+Проверим условия симметрии и согласованности для таких хар. функций.
+
+Условие симметрии дано по построению. Проверим согласованность.
+
+$$
+\begin{array}{l}
+\phi_{s_1, \dots, s_n}(\lambda_1, \dots, \lambda_n) \vline_{\lambda_n=0} = \\
+ |s_n = t_m \Rightarrow \lambda_n = \lambda_{\sigma_m}| = \\
+\phi_{t_1, \dots, t_n}(\lambda_{\sigma_1}, \dots, \lambda_{\sigma_n}) \vline_{\lambda_{\sigma_m} = 0} =\\
+|\text{условие следствия}| =\\
+\phi_{t_1, \dots, t_{m-1}, t_{m+1}, \dots, t_n}
+(\lambda_{\sigma_1}, \dots, \lambda_{\sigma_{m-1}}, \lambda_{\sigma_{m+1}}, \dots, \lambda_{\sigma_n}) = \\
+|\text{по построению}| = \\
+\phi_{s_1, \dots, s_{n-1}}(\lambda_1, \dots, \lambda_{n-1})
+\end{array}
+$$
+
+Условия симметрии и согласованности проверяются аналогично,
+если есть совпадающие $s_i = s_j$.  По теореме Колмогорова искомый процесс существует.
+\end{proof}
+
+
+\ifdefined\Main\else
+\end{document}
+\fi
