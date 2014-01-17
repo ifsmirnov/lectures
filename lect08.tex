@@ -23,10 +23,10 @@ $$\myF_\xi = \{\{\xi \in B\}: B \in \myB(\myR)\}$$
 
 \begin{definition}[обозначения]
 $\{\xi_\alpha\}_{\alpha \in \Alpha}$~-- множество с.в., $\sigma(\xi_\alpha, \alpha \in \Alpha)$~--
-$\sigma$-алгебра, порожденная всеми $\xi_alpha$ -  это
-$$formule$$
+$\sigma$-алгебра, порожденная всеми $\xi_\alpha$ -  это
+$$\Xi = \sigma(\xi_\alpha, \alpha in \Alpha) := \sigma\pars{\mybigcup_{\alpha in \Alpha} \myF_{\xi_\alpha}}$$
 
-минимальная сиг-алгебра, содержащая все $\myF_{\xi_alpha}$.
+минимальная $\sigma$-алгебра, содержащая все $\myF_{\xi_\alpha}$.
 \end{definition}
 
 \begin{definition}
@@ -71,7 +71,7 @@ $\forall a > 0$ процесс $X_t \ W_{t+a} - W_a$ является винер
 \begin{definition}
 Пусть $\tau$~-- марковский момент отн. $ $ на $ $. Тогда сиг-алгеброй эф-тау
 называется
-$$\myF_\tau = \{A \in \myF: \forall t \in T \{\tau \leq t\} \cap \in \myF_t\}$$
+$$\myF_\tau = \{A \in \myF: \forall t \in T \ \{\tau \leq t\} \cap A \in \myF_t\}$$
 \end{definition}
 %\begin{upr}
 \begin{enumerate}
@@ -84,16 +84,16 @@ $$\myF_\tau = \{A \in \myF: \forall t \in T \{\tau \leq t\} \cap \in \myF_t\}$$
 \begin{theorem}[строго марковское свойство $W_t$]
 Пусть $(W_t, t \geq 0)$~-- винеровский процесс, а $\tau$~-- момент
 остановки относительно $\myF^W$. Тогда процесс
-$X_t = W_{t_\tau} - W_\tau$ является винеровским и не зависит от $\myF_\tau$.
+$X_t = W_{t+\tau} - W_\tau$ является винеровским и не зависит от $\myF_\tau$.
 \end{theorem}
 \begin{lem}
 \begin{enumerate}
 \item Пусть $\xi, \eta$~-- случайные векторы. Тогда $\xi \overset{d}{=} \eta \Leftrightarrow
 \forall f$~-- непр., огр.
-$$Ef(\xi) Ef(\eta)$$
-\item Пусть $xi$~-- случайный вектор. Тогда $\xi$ независимо с некоторым событием $A \Leftrightarrow
+$$Ef(\xi) = Ef(\eta)$$
+\item Пусть $x_i$~-- случайный вектор. Тогда $\xi$ независимо с некоторым событием $A \Leftrightarrow
 \forall f$~-- непр огр
-$$E(f(\xi)I_a) = Ef(\xi) P(a)$$
+$$E(f(\xi)I_A) = Ef(\xi) P(A)$$
 \end{enumerate}
 \end{lem}
 \begin{proof}
@@ -102,14 +102,15 @@ $$E(f(\xi)I_a) = Ef(\xi) P(a)$$
 $(\Leftarrow)$  $f(x) = cos(<t,x>)$ или $sin(<t, x>)$ - огр. непр. функции => хф $\xi$
 и $\eta$ совпадают => $\xi \overset{d}{=} \eta$
 \item $(\Rightarrow)$ очевидно.
-$(\Leftarrow)$ $xi$~-- нез. с $A \Leftrightarrow \forall B \in \myB(\myR)
+$(\Leftarrow)$ $x_i$~-- нез. с $A \Leftrightarrow \forall B \in \myB(\myR)
 \{\xi \in B\}$ нез. с $A \Leftrightarrow$
 $\{\xi \in B\}$ нез. с $A$ и $B$ замкнуто.
 
 $\{\xi \in B\}, B$ замкнуто~-- $\pi$-система и $\sigma$ от нее~--
 это $\{\{\xi \in B\}: B \in \myB(\myR)\}$
 
-Для замкнутого $B$ рассмотрим (записи на бумажке)
+Для замкнутого $B$ рассмотрим $f(x) = \pars {1 - \frac{\rho(x, B)}{2}}$.
+$f_\eps(x)$ - нормирует расстояние, так что если оно 0, то значение 1, если меньше $\eps$ то линейно, а при $\geq \eps$ --- 0
 \end{enumerate}
 \end{proof}
 \begin{proof}[СМС]
