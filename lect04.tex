@@ -41,7 +41,7 @@ $$\phi_\xi(z) = Ez^\xi, z \in \myR$$
 \setcounter{enumi}{3}
 \item $\phi_\xi(z) = \mysum_{k=0}^{\infty}z^k p_k$
 \item $\phi_\xi(0) = p_0$
-\item $p_k = \frac{f_\xi^{(k)}(z)}{k!}$
+\item $p_k = \frac{f_\xi^{(k)}(0)}{k!}$
 \item Ряд для $\phi_\xi(z)$ сходится абсолютно и равномерно в области $\{|z| \leq 1\}$
 \item $\phi_\xi(z)$ непрерывно дифференцируема бесконечное число раз в области $\{|z| < 1\}$
 \end{enumerate}
@@ -57,7 +57,7 @@ $\phi_{X_{n+1}}(z) = Ez^{X_{n+1}}$
 $$
  E \pars {z^{X_{n+1}} | X_n = m} =
  E \pars {z^{\mysum_{k=1}^{X_n} \xi_k^{(n+1)}} \vline X_n = m} =
- E \pars {z^{\mysum_{k=1}^m \xi_k^{(n+1}} \vline X_n = m} =
+ E \pars {z^{\mysum_{k=1}^m \xi_k^{(n+1)}} \vline X_n = m} =
  E z^{\mysum_{k=1}^m \xi_k^{(n+1)}} =
  (\phi_\xi(z))^m
 $$

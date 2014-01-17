@@ -93,7 +93,7 @@ $$P(\{S_n, n \geq 1\} \text{вернется в ноль}) = 1 - |p-q|$$
 \end{theorem}
 \begin{proof}
 \begin{eqnarray*}
-&& P(\{S_n, n >= 1\} \text{вернется в 0}) = \\
+&& P(\{S_n, n \geq 1\} \text{вернется в 0}) = \\
 && \mysum_{n=1}^{\infty} P(S_1 \neq 0, \dots, S_{2n} = 0) = \\
 && \mysum_{n=1}^{\infty} 2 \tilde{C_N} (pq)^n = \\
 && \mysum_{n=1}^{\infty} 2 C_{n-1} (pq)^n = \\
@@ -150,7 +150,7 @@ $\frac{|S_n|}{\sqrt{n}} \overset{d}{\to} |\eta| \sim |\mathcal{N}(0, 1)|$.
 \underline{Вопрос}: верно ли данное?
 
 $$E \frac{|S_n|}{\sqrt{n}} \to E|\eta| =
-\int_\myR \frac{1}{\sqrt{\frac{2}{\pi}}} |x| e^{-\frac{x^2}{2}} dx = \sqrt{\frac{2}{\pi}}$$
+\int_\myR \frac{1}{\sqrt{2\pi}} |x| e^{-\frac{x^2}{2}} dx = \sqrt{\frac{2}{\pi}}$$
 
 \begin{definition}
 Множество случайных величин $\{\xi_\alpha, \alpha \in \mathfrak{A}\}$ называется
@@ -179,7 +179,7 @@ $$E\xi_n \to E\xi \Leftrightarrow \{\xi_n, n \in \myN\} \text{ равномер�
 Возьмем $c > 0: \frac{G(t)}{t} > a \; \forall t > c$. Тогда
 $\forall t > c, \forall n \in \myN$
 
-$$E(|\xi_n|\ind{|\xi_n| \geq t}) \leq E\pars{\frac{G(|\xi_n|)}{a} \ind{|\xi_n| >= t}} \leq
+$$E(|\xi_n|\ind{|\xi_n| \geq t}) \leq E\pars{\frac{G(|\xi_n|)}{a} \ind{|\xi_n| \geq t}} \leq
 E\frac{G(|\xi_n|)}{a} \leq \frac{M}{a} = \eps$$
 $\Leftrightarrow \{\xi_n, n \in \myN\}$ равномерно интегрируема.
 \end{proof}

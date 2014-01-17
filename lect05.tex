@@ -21,7 +21,7 @@ $$C(t, B_t) = \{y \in S: y(t) \in B_t\}$$
 Минимальная $\sigma$-алгебра $\myB_T$, содержащая все эти элементарные цилиндры,
 называется \emph{цилиндрической $\sigma$-алгеброй} на $S$.
 
-$$\myB_T = \sigma\{C(t, B_t): t \in T, B_t \in \myB_T\}$$
+$$\myB_T = \sigma\{C(t, B_t): t \in T, B_t \in \myB_t\}$$
 \end{definition}
 
 $(S, \myB_T)$~-- измеримое пространство.
@@ -48,7 +48,7 @@ $\myM$~-- система элементарных цилиндров в $\myB_T$
 $\forall C(t, B_t) \in \myM$ получаем
 
 $$X^{-1}(C(t, B_t)) = \{\omega:  X(\omega) \in C(t, B_t)\}
-= \{\omega: X_t(\omega) \in B_t \} = \{X_t^{-1}(B_t) \in \myF\}$$
+= \{\omega: X_t(\omega) \in B_t \} = X_t^{-1}(B_t) \in \myF$$
 т.к. $X_t$~-- случайный элемент.
 
 $(\Leftarrow)$ По критерию измеримости отображения
@@ -63,7 +63,7 @@ $$\forall B \in \myB_T \; X^{-1}(B) \in \myF$$
 \begin{definition}
 \emph{Распределением} $P_X$ случайного процесса $X =  (X_t, t \in T)$
 называется вероятностная мера на $(S, \myB_T)$
-т.ч. $\forall \myB \in \myB_T \; P_X(B) =  P(X \in B)$.
+т.ч. $\forall B \in \myB_T \; P_X(B) =  P(X \in B)$.
 \end{definition}
 
 Это определение удобно только в том случае, когда <<время>> конечно.
@@ -171,7 +171,7 @@ P_{t_1 \dots t_{n-1}}(B_{t_1} \times \dots \times B_{t_{n-1}})$$
 \begin{theorem}[Колмогорова о существовании случайного процесса, б/д]
 Пусть $T$~-- некоторое множество, $\forall n \in \myN \; \forall t_1 \dots t_n \in T$ задана
 вероятностная мера
-$P_{t_1 \dots t_n}$ на $(\myR^n, \myB{\myR^n})$,
+$P_{t_1 \dots t_n}$ на $(\myR^n, \myB(\myR^n))$,
 причем для системы $\{P_{t_1, \dots t_n}\}$  выполнены условия симметрии и согласованности.
 Тогда $\exists$ вероятностное пространство $(\Omega, \myF, P)$
 и вещественный случайный процесс $(X_t, t \in T)$
